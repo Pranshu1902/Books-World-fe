@@ -8,7 +8,7 @@ export default function History() {
         fixed
       </div>
       <div className="w-4/5 p-4 absolute right-0 bg-gray-100 min-h-screen">
-        History
+        <p className="text-4xl font-bold text-gray-600 pb-4">History</p>
       </div>
     </div>
   );

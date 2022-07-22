@@ -8,7 +8,7 @@ export default function Books() {
         fixed
       </div>
       <div className="w-4/5 p-4 absolute right-0 bg-gray-100 min-h-screen">
-        Books
+        <p className="text-4xl font-bold text-gray-600 pb-4">Books</p>
       </div>
     </div>
   );
