@@ -1,53 +1,74 @@
-import logo from "../images/logo.png";
-import home from "../images/home.png";
-import { Link } from "raviger";
+import Dashboard from "../Common/Dashboard";
+import { TextField } from "@material-ui/core";
 
 export default function Home() {
+  const books = [
+    {
+      name: "How to turn down a billion dollars",
+      author: "Evan Spiegel",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+    {
+      name: "Book 1",
+      author: "Steve Jobs",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+    {
+      name: "Book 2",
+      author: "Elon Musk",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+    {
+      name: "Book 3",
+      author: "Jeff Bezos",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+    {
+      name: "Book 4",
+      author: "Sundar Pichai",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+    {
+      name: "Book 5",
+      author: "Silicon valley",
+      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    },
+  ];
+
   return (
-    <div className="p-4">
-      <div className="flex flex-row justify-between m-4">
-        <img src={logo} alt="logo" width={"5%"} />
-        <div className="text-3xl md:text-7xl font-bold">Book's World</div>
-        <div className="p-2">
-          <Link
-            href="/login"
-            className="bg-blue-500 shadow shover:bg-blue-700 transition duration-300 text-white font-bold p-3 rounded-lg"
-          >
-            Login
-          </Link>
-        </div>
+    <div className="flex">
+      <div className="w-1/5 fixed">
+        <Dashboard currentTab="Home" />
       </div>
-      <div>
-        <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-6">
-          <div className="text-3xl">
-            One place to manage all the books you ever read.
+      <div className="w-4/5 p-4 absolute right-0 bg-gray-100 min-h-screen gap-2">
+        <p className="text-4xl font-bold text-gray-600 pb-4">Home</p>
+        <div className="flex justify-between">
+          <div className="bg-white w-1/4 shadow rounded-lg p-6">
+            <p className="text-gray-500 ">Books Read:</p>
+            <p className="text-6xl font-bold">{"10"}</p>
           </div>
           <div>
-            <img src={home} alt="icon" className="" />
+            <TextField label="Search" variant="outlined" />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-          <div>
-            <img src={home} alt="icon" className="" />
-          </div>
-          <div className="text-3xl">
-            Get detailed analysis on the book you read.
-          </div>
+        <div className="pt-12 grid grid-cols-2 gap-6">
+          {books.map((book) => (
+            <div className="flex gap-2 bg-white rounded-lg shadow p-2">
+              <img
+                src={book.image}
+                alt=""
+                width={"10%"}
+                height={"10%"}
+                className="w-1/4"
+              />
+              <div className="">
+                <p className="text-3xl font-bold">{book.name}</p>
+                <p className="pt-6">{book.author}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="flex justify-center items-center pt-24">
-        <p className="text-5xl">
-          Read better so you actually understand and remember it!
-        </p>
-      </div>
-      <div className="flex flex-col justify-center items-center pt-24">
-        <div className="bg-purple-100 rounded-lg text-2xl p-3 shadow-lg">
-          <p>A room without books is like a body without a soul.</p>
-        </div>
-        <p>-Cicero</p>
       </div>
     </div>
   );
 }
-
-// use some public api get get books images from name\
