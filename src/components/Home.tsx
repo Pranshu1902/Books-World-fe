@@ -1,39 +1,10 @@
 import Dashboard from "../Common/Dashboard";
 import { TextField } from "@material-ui/core";
+import { useState } from "react";
+import { books } from "../Common/Data";
 
 export default function Home() {
-  const books = [
-    {
-      name: "How to turn down a billion dollars",
-      author: "Evan Spiegel",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-    {
-      name: "Book 1",
-      author: "Steve Jobs",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-    {
-      name: "Book 2",
-      author: "Elon Musk",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-    {
-      name: "Book 3",
-      author: "Jeff Bezos",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-    {
-      name: "Book 4",
-      author: "Sundar Pichai",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-    {
-      name: "Book 5",
-      author: "Silicon valley",
-      image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
-    },
-  ];
+  const [search, setSearch] = useState("");
 
   return (
     <div className="flex">
@@ -48,7 +19,12 @@ export default function Home() {
             <p className="text-6xl font-bold">{"10"}</p>
           </div>
           <div>
-            <TextField label="Search" variant="outlined" />
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
         </div>
         <div className="pt-12 grid grid-cols-2 gap-6">

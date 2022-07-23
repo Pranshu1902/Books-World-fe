@@ -1,0 +1,51 @@
+export const books = [
+  {
+    name: "How to turn down a billion dollars",
+    author: "Evan Spiegel",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: true,
+    comment:
+      "I love this book, learnt a lot about silicon valley and the world of startups",
+  },
+  {
+    name: "Book 1",
+    author: "Steve Jobs",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: true,
+    comment: "Amazing book with insightful knowledge of the world",
+  },
+  {
+    name: "Book 2",
+    author: "Elon Musk",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: false,
+    comment: "Amazing book with insightful knowledge of the world",
+  },
+  {
+    name: "Book 3",
+    author: "Jeff Bezos",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: true,
+    comment: "Amazing book with insightful knowledge of the world",
+  },
+  {
+    name: "Book 4",
+    author: "Sundar Pichai",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: false,
+    comment: "Amazing book with insightful knowledge of the world",
+  },
+  {
+    name: "Book 5",
+    author: "Silicon valley",
+    image: "https://mpd-biblio-covers.imgix.net/9781250108623.jpg",
+    completedIn: 25,
+    completed: true,
+    comment: "Amazing book with insightful knowledge of the world",
+  },
+];
