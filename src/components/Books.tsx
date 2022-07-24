@@ -1,3 +1,4 @@
+import CircularStatic from "../Common/CircularProgress";
 import Dashboard from "../Common/Dashboard";
 import { books } from "../Common/Data";
 
@@ -12,13 +13,17 @@ export default function Books() {
         <p className="text-4xl font-bold text-gray-600 pb-4">Books</p>
         <div className="pt-12 flex flex-col gap-6">
           {books.map((book) => (
-            <div className="flex flex-row gap-4 bg-white rounded-lg shadow p-2">
-              <div className="w-1/3">
+            <div className="flex flex-row gap-6 bg-white rounded-lg shadow p-2">
+              <div className="w-1/2">
                 <p className="text-3xl font-bold">{book.name}</p>
                 <p className="pt-6">{book.author}</p>
               </div>
-              <div className="w-1/3  flex justify-center items-center">
-                {book.completed ? (
+              <div className="w-1/4 flex justify-center items-center">
+                <p className="truncate">Comments: {book.comment}</p>
+              </div>
+              <div className="w-1/4  flex justify-center items-center">
+                <CircularStatic value={book.percentage} size={100} />
+                {/* {book.completed ? (
                   <p className="bg-blue-300 rounded-full p-1 px-6">
                     <i className="fa fa-clock-o"></i> Days: {book.completedIn}
                   </p>
@@ -31,10 +36,7 @@ export default function Books() {
                       Currently reading
                     </p>
                   </div>
-                )}
-              </div>
-              <div className="w-1/3 flex justify-center items-center">
-                <p className="truncate">Comments: {book.comment}</p>
+                )} */}
               </div>
             </div>
           ))}

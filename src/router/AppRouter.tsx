@@ -6,6 +6,7 @@ import Login from "../components/User/Login";
 import Signup from "../components/User/Signup";
 import History from "../components/History";
 import Profile from "../components/Profile";
+import Book from "../components/Book";
 
 const routes = {
   "/": () => <LandingPage />,
@@ -15,6 +16,7 @@ const routes = {
   "/books": () => <Books />,
   "/history": () => <History />,
   "/profile": () => <Profile />,
+  "/book/:id": ({ id }: { id: string }) => <Book id={Number(id)} />,
 };
 
 export default function AppRouter(props: { user: any }) {

@@ -2,6 +2,8 @@ import Dashboard from "../Common/Dashboard";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import { books } from "../Common/Data";
+import CircularStatic from "../Common/CircularProgress";
+import { Link } from "raviger";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -13,8 +15,8 @@ export default function Home() {
       </div>
       <div className="w-4/5 p-4 absolute right-0 bg-gray-100 min-h-screen gap-2">
         <p className="text-4xl font-bold text-gray-600 pb-4">Home</p>
-        <div className="flex justify-between">
-          <div className="bg-white w-1/4 shadow rounded-lg p-6">
+        <div className="flex flex-col md:flex-row gap-4 justify-between">
+          <div className="bg-white md:w-1/4 shadow rounded-lg p-6">
             <p className="text-gray-500 ">Books Read:</p>
             <p className="text-6xl font-bold">{"10"}</p>
           </div>
@@ -22,17 +24,21 @@ export default function Home() {
             <TextField
               label="Search"
               variant="outlined"
+              className="w-full md:w-auto"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </div>
-        <div className="pt-12 grid grid-cols-2 gap-6">
+        <div className="pt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           {books.map((book) => (
-            <div className="flex gap-2 bg-white rounded-lg shadow p-2">
+            <Link
+              href={`/book/${book.id}`}
+              className="flex gap-2 bg-white rounded-lg shadow p-2"
+            >
               <img
                 src={book.image}
-                alt=""
+                alt={book.name + " logo"}
                 width={"10%"}
                 height={"10%"}
                 className="w-1/4"
@@ -40,8 +46,11 @@ export default function Home() {
               <div className="">
                 <p className="text-3xl font-bold">{book.name}</p>
                 <p className="pt-6">{book.author}</p>
+                <div className="text-3xl">
+                  <CircularStatic value={book.percentage} size={100} />
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
