@@ -1,5 +1,5 @@
 import Dashboard from "../Common/Dashboard";
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { books, mode } from "../Common/Data";
 import CircularStatic from "../Common/CircularProgress";
@@ -28,16 +28,29 @@ export default function Home() {
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"
-        } p-4 min-h-screen gap-2`}
+        } p-4 min-h-screen gap-4`}
       >
-        <p
-          className={`${
-            darkMode ? "text-white" : "text-gray-600"
-          } text-4xl font-bold pb-4`}
-        >
-          Home
-        </p>
-        <div className="flex flex-col md:flex-row gap-4 justify-between">
+        <div className="flex flex-col md:flex-row justify-between gap-4">
+          <p
+            className={`${
+              darkMode ? "text-white" : "text-gray-600"
+            } text-4xl font-bold pb-4`}
+          >
+            Home
+          </p>
+          <div>
+            <Button
+              variant="contained"
+              fullWidth
+              style={{ backgroundColor: "#13ae4b", color: "white" }}
+              className="cursor-pointer"
+              href="/add"
+            >
+              <i className="fa fa-plus"></i>&nbsp;Add New Book
+            </Button>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 pt-4 justify-between">
           <div
             className={`${
               darkMode ? "bg-gray-700 text-white" : "bg-white"
@@ -52,6 +65,7 @@ export default function Home() {
               variant="outlined"
               className={`${darkMode ? "text-white" : ""} w-full md:w-auto`}
               value={search}
+              color={darkMode ? "secondary" : "primary"}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>

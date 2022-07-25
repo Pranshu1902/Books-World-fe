@@ -6,6 +6,7 @@ import Login from "../components/User/Login";
 import Signup from "../components/User/Signup";
 import Profile from "../components/Profile";
 import Book from "../components/Book";
+import AddBook from "../components/AddBook";
 
 const routes = {
   "/": () => <LandingPage />,
@@ -13,7 +14,7 @@ const routes = {
   "/signup": () => <Signup />,
   "/home": () => <Home />,
   "/books": () => <Books />,
-  // "/history": () => <History />,
+  "/add": () => <AddBook />,
   "/profile": () => <Profile />,
   "/book/:id": ({ id }: { id: string }) => <Book id={Number(id)} />,
 };
