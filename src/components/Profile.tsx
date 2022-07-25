@@ -107,7 +107,10 @@ export default function Profile() {
           </div>
         </div>
         <Popup open={updatePass} onClose={() => setUpdatePass(false)}>
-          <UpdatePassword closeCB={() => setUpdatePass(false)} />
+          <UpdatePassword
+            closeCB={() => setUpdatePass(false)}
+            darkMode={darkMode}
+          />
         </Popup>
       </div>
     </div>

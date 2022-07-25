@@ -9,7 +9,10 @@ import {
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
-export default function UpdatePassword(props: { closeCB: () => void }) {
+export default function UpdatePassword(props: {
+  closeCB: () => void;
+  darkMode: boolean;
+}) {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: any) => {
@@ -20,17 +23,27 @@ export default function UpdatePassword(props: { closeCB: () => void }) {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-semibold text-blue-500 flex items-center justify-center">
+    <div className={`${props.darkMode ? "bg-gray-700" : ""} p-6`}>
+      <h1
+        className={`${
+          props.darkMode ? "text-white" : "text-blue-500"
+        } text-4xl font-semibold flex items-center justify-center`}
+      >
         Update Password
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col p-4 pt-12 gap-6">
         <div className="flex flex-col gap-6 justify-center">
-          <TextField variant="outlined" label="New Password" type="password" />
+          <TextField
+            variant="outlined"
+            label="New Password"
+            type="password"
+            color={`${props.darkMode ? "secondary" : "primary"}`}
+          />
           <TextField
             variant="outlined"
             label="Confirm New Password"
             type="password"
+            color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>
         <div className="flex justify-between">
