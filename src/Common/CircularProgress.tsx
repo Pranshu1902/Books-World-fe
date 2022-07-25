@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
@@ -6,8 +6,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number; customSize: number }
+  props: CircularProgressProps & {
+    value: number;
+    customSize: number;
+    darkMode: boolean;
+  }
 ) {
+  const [textColor, setTextColor] = React.useState("black");
+
+  useEffect(() => {
+    props.darkMode ? setTextColor("white") : setTextColor("black");
+  }, [props.darkMode]);
+
   return (
     <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
@@ -32,14 +42,18 @@ function CircularProgressWithLabel(
           variant="caption"
           component="div"
           color="text.secondary"
-          style={{ fontSize: "20px" }}
+          style={{ fontSize: "20px", color: textColor }}
         >{`${Math.round(props.value)}%`}</Typography>
       </Box>
     </Box>
   );
 }
 
-export default function CircularStatic(props: { value: number; size: number }) {
+export default function CircularStatic(props: {
+  value: number;
+  size: number;
+  darkMode: boolean;
+}) {
   const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
@@ -53,5 +67,11 @@ export default function CircularStatic(props: { value: number; size: number }) {
     };
   }, []);
 
-  return <CircularProgressWithLabel value={progress} customSize={props.size} />;
+  return (
+    <CircularProgressWithLabel
+      value={progress}
+      customSize={props.size}
+      darkMode={props.darkMode}
+    />
+  );
 }
