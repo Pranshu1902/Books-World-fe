@@ -86,3 +86,5 @@ export const books = [
     pagesRead: 100,
   },
 ];
+
+export let mode = true;

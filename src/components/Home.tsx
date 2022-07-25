@@ -1,7 +1,7 @@
 import Dashboard from "../Common/Dashboard";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
-import { books } from "../Common/Data";
+import { books, mode } from "../Common/Data";
 import CircularStatic from "../Common/CircularProgress";
 import { Link } from "raviger";
 import Header from "../Common/Header";
@@ -9,7 +9,7 @@ import { tabs } from "../type/DataTypes";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(mode);
 
   tabs.map((tab) => {
     tab.title === "Home" ? (tab.active = true) : (tab.active = false);

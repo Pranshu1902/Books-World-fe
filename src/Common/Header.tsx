@@ -9,13 +9,6 @@ export default function Header(props: {
   darkMode: boolean;
   setDarkMode: (darkMode: boolean) => void;
 }) {
-  const tabs = [
-    { name: "Home", link: "/home", icon: "fa fa-home" },
-    { name: "Books", link: "/books", icon: "fa fa-book" },
-    { name: "History", link: "/history", icon: "fa fa-history" },
-    { name: "Profile", link: "/profile", icon: "fa fa-user-circle-o" },
-  ];
-
   return (
     <div className="p-6 flex justify-between text-white">
       <div className="flex items-center gap-2">

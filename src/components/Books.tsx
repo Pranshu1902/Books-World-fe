@@ -3,14 +3,14 @@ import { Link } from "raviger";
 import { useEffect, useState } from "react";
 import CircularStatic from "../Common/CircularProgress";
 import Dashboard from "../Common/Dashboard";
-import { books } from "../Common/Data";
+import { books, mode } from "../Common/Data";
 import Header from "../Common/Header";
 import { tabs } from "../type/DataTypes";
 
 export default function Books() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [completed, setCompleted] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(mode);
 
   tabs.map((tab) => {
     tab.title === "Books" ? (tab.active = true) : (tab.active = false);
@@ -29,11 +29,25 @@ export default function Books() {
         <Dashboard currentTab="Books" />
         fixed
       </div> */}
-      <div className="p-4 bg-gray-100 min-h-screen">
+      <div
+        className={`${
+          darkMode ? "bg-gray-900 text-white" : "bg-gray-100"
+        } p-4 min-h-screen`}
+      >
         <div className="flex flex-col">
-          <p className="text-4xl font-bold text-gray-600 pb-4">Books</p>
+          <p
+            className={`${
+              darkMode ? "text-white" : "text-gray-600"
+            } text-4xl font-bold pb-4`}
+          >
+            Books
+          </p>
           <div className="flex flex-col md:flex-row justify-between">
-            <div className="bg-white shadow rounded-lg p-6 md:w-1/4">
+            <div
+              className={`${
+                darkMode ? "bg-gray-700" : "bg-white"
+              } shadow rounded-lg p-6 md:w-1/4`}
+            >
               <p className="text-gray-500">Total books:</p>
               <p className="text-6xl font-bold">
                 {
@@ -64,7 +78,9 @@ export default function Books() {
             .map((book) => (
               <Link
                 href={`/book/${book.id}`}
-                className="flex flex-row gap-6 bg-white rounded-lg shadow p-2"
+                className={`${
+                  darkMode ? "bg-gray-700" : "bg-white"
+                } flex flex-row gap-6 rounded-lg shadow p-2`}
               >
                 <div className="w-1/6 hidden md:block">
                   <img src={book.image} alt="" />
