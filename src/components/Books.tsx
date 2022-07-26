@@ -2,7 +2,6 @@ import { Switch } from "@material-ui/core";
 import { Link } from "raviger";
 import { useEffect, useState } from "react";
 import CircularStatic from "../Common/CircularProgress";
-import Dashboard from "../Common/Dashboard";
 import { books, mode } from "../Common/Data";
 import Header from "../Common/Header";
 import { tabs } from "../type/DataTypes";
@@ -25,10 +24,6 @@ export default function Books() {
       <div className="bg-green-800">
         <Header tabs={tabs} darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-      {/* <div className="w-1/5 fixed">
-        <Dashboard currentTab="Books" />
-        fixed
-      </div> */}
       <div
         className={`${
           darkMode ? "bg-gray-900 text-white" : "bg-gray-100"

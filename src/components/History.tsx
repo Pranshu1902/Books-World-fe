@@ -1,9 +1,8 @@
-import { FormControlLabel, Switch } from "@material-ui/core";
+import { Switch } from "@material-ui/core";
 import { useState } from "react";
-import Dashboard from "../Common/Dashboard";
 import { books } from "../Common/Data";
 import Header from "../Common/Header";
-import { linkType, tabs } from "../type/DataTypes";
+import { tabs } from "../type/DataTypes";
 
 export default function History() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -19,10 +18,6 @@ export default function History() {
       <div className="bg-green-800">
         <Header tabs={tabs} darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-      {/* <div className="w-1/5 fixed">
-        <Dashboard currentTab="History" />
-        fixed
-      </div> */}
       <div className="p-4 bg-gray-100 min-h-screen">
         <div className="flex justify-between">
           <p className="text-4xl font-bold text-gray-600 pb-4">History</p>

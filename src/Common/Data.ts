@@ -87,4 +87,4 @@ export const books = [
   },
 ];
 
-export let mode = true;
+export let mode = false;

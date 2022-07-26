@@ -1,6 +1,5 @@
 import { Button, TextField } from "@material-ui/core";
-import { useState } from "react";
-import Dashboard from "../Common/Dashboard";
+import { useEffect, useState } from "react";
 import { mode } from "../Common/Data";
 import Header from "../Common/Header";
 import Popup from "../Common/Popup";
@@ -20,15 +19,15 @@ export default function Profile() {
     tab.title === "Profile" ? (tab.active = true) : (tab.active = false);
   });
 
+  useEffect(() => {
+    document.title = "Profile | Book's World";
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="bg-green-800">
         <Header tabs={tabs} darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-      {/* <div className="w-1/5 fixed">
-        <Dashboard currentTab="Profile" />
-        fixed
-      </div> */}
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"

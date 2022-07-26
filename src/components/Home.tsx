@@ -1,6 +1,5 @@
-import Dashboard from "../Common/Dashboard";
 import { Button, TextField } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { books, mode } from "../Common/Data";
 import CircularStatic from "../Common/CircularProgress";
 import { Link } from "raviger";
@@ -15,6 +14,10 @@ export default function Home() {
     tab.title === "Home" ? (tab.active = true) : (tab.active = false);
   });
 
+  useEffect(() => {
+    document.title = "Home | Book's World";
+  }, []);
+
   return (
     <div
       className={`${darkMode ? "bg-gray-700 text-white" : ""} flex flex-col`}
@@ -22,9 +25,6 @@ export default function Home() {
       <div className="w-full bg-green-800">
         <Header tabs={tabs} darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-      {/* <div className="w-1/5 fixed">
-        <Dashboard currentTab="Home" />
-      </div> */}
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"
