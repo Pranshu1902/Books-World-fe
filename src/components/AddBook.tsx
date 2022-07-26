@@ -46,7 +46,7 @@ export default function AddBook() {
         <div className="flex justify-center">
           <form
             className={`${
-              darkMode ? "bg-gray-700" : "bg-white"
+              darkMode ? "bg-gray-800" : "bg-white"
             } rounded-lg p-4 flex flex-col gap-8 md:w-3/5`}
           >
             <div className="flex flex-col md:flex-row gap-4">
@@ -129,13 +129,13 @@ export default function AddBook() {
               <input type="file" />
             </div>
             <div className="pt-16 flex flex-col md:flex-row gap-4 justify-between">
+              <Button variant="contained">Cancel</Button>
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#13ae4b", color: "white" }}
               >
                 Create Book
               </Button>
-              <Button variant="contained">Cancel</Button>
             </div>
           </form>
         </div>

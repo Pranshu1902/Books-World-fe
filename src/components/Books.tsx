@@ -37,7 +37,7 @@ export default function Books() {
         <div className="flex flex-col">
           <p
             className={`${
-              darkMode ? "text-white" : "text-gray-600"
+              darkMode ? "text-white" : "text-gray-500"
             } text-4xl font-bold pb-4`}
           >
             Books
@@ -45,7 +45,7 @@ export default function Books() {
           <div className="flex flex-col md:flex-row justify-between">
             <div
               className={`${
-                darkMode ? "bg-gray-700" : "bg-white"
+                darkMode ? "bg-gray-800" : "bg-white"
               } shadow rounded-lg p-6 md:w-1/4`}
             >
               <p className="text-gray-500">Total books:</p>
@@ -64,7 +64,7 @@ export default function Books() {
                 defaultChecked={completed}
                 value={completed}
                 onChange={() => setCompleted(!completed)}
-                color="secondary"
+                color="primary"
               />
               <p>Reading</p>
             </div>
@@ -79,13 +79,13 @@ export default function Books() {
               <Link
                 href={`/book/${book.id}`}
                 className={`${
-                  darkMode ? "bg-gray-700" : "bg-white"
+                  darkMode ? "bg-gray-800" : "bg-white"
                 } flex flex-row gap-6 rounded-lg shadow p-2`}
               >
                 <div className="w-1/6 hidden md:block">
                   <img src={book.image} alt="" />
                 </div>
-                <div className="w-1/2">
+                <div className="w-1/2 pl-2">
                   <p className="text-3xl font-bold">{book.name}</p>
                   <p className="pt-6">{book.author}</p>
                 </div>

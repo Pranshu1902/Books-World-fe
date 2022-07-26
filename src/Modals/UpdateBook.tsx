@@ -8,8 +8,13 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import DarkModeSlider from "../Common/DarkModeSlider";
 
-export default function UpdateBook(props: { closeCB: () => void; book: any }) {
+export default function UpdateBook(props: {
+  closeCB: () => void;
+  book: any;
+  darkMode: boolean;
+}) {
   const [name, setName] = useState(props.book.name);
   const [author, setAuthor] = useState(props.book.author);
   const [pagesRead, setPagesRead] = useState(props.book.pagesRead);
@@ -27,8 +32,12 @@ export default function UpdateBook(props: { closeCB: () => void; book: any }) {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-semibold text-blue-500 flex items-center justify-center">
+    <div className={`${props.darkMode ? "bg-gray-800 text-white" : ""} p-6`}>
+      <h1
+        className={`${
+          props.darkMode ? "text-white" : ""
+        } text-4xl font-semibold flex items-center justify-center`}
+      >
         Update book
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col p-4 gap-6">
@@ -86,46 +95,17 @@ export default function UpdateBook(props: { closeCB: () => void; book: any }) {
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
           </div>
-          {/* <div className="flex flex-col gap-2 md:w-1/2 justify-center">
-            <p className="font-semibold text-xl text-gray-500">Status</p>
-            {/* <InputLabel
-              id="updateStatus"
-              className="font-semibold text-xl text-gray-500"
-            >
-              Status
-            </InputLabel>
-            <Select
-              labelId="updateStatus"
-              value={status}
-              variant="outlined"
-              label="Status"
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <MenuItem value={"Completed"}>Completed</MenuItem>
-              <MenuItem value={"Reading"}>Reading</MenuItem>
-              <MenuItem value={"Aborted"}>Aborted</MenuItem>
-            </Select>
-            <NativeSelect
-              variant="outlined"
-              onChange={(e) => setStatus(e.target.value)}
-              defaultValue={status}
-            >
-              <option value="Completed">Completed</option>
-              <option value="Reading">Reading</option>
-              <option value="Aborted">Aborted</option>
-            </NativeSelect>
-          </div> */}
         </div>
         <div className="flex justify-between">
+          <Button variant="contained" onClick={() => props.closeCB()}>
+            Cancel
+          </Button>
           <Button
             variant="contained"
             type="submit"
-            style={{ backgroundColor: "#00D100", color: "white" }}
+            style={{ backgroundColor: "#13ae4b", color: "white" }}
           >
             Update
-          </Button>
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
           </Button>
         </div>
       </form>

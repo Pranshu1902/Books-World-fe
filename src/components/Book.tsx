@@ -8,12 +8,14 @@ import Popup from "../Common/Popup";
 import UpdateBook from "../Modals/UpdateBook";
 import UpdateBookStatus from "../Modals/UpdateBookStatus";
 import DeleteBook from "../Modals/DeleteBook";
+import AddComment from "../Modals/AddComment";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
   const [deleteBook, setDeleteBook] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [addComment, setAddComment] = useState(false);
 
   const book = books.filter((book) => book.id === props.id)[0];
 
@@ -30,19 +32,29 @@ export default function Book(props: { id: number }) {
       <div className="bg-green-800">
         <Header tabs={tabs} darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-      <div className="bg-gray-100 min-h-screen gap-2">
-        <div className="p-6">
-          <div className="flex flex-col gap-6 bg-white p-4 rounded-lg text-gray-500">
+      <div
+        className={`${
+          darkMode ? "bg-gray-900" : "bg-gray-100"
+        } min-h-screen gap-2`}
+      >
+        <div className="p-6 flex flex-col gap-6">
+          <div
+            className={`${
+              darkMode ? "bg-gray-800 text-white" : "bg-white"
+            } flex flex-col gap-6 p-4 rounded-lg text-gray-500`}
+          >
             <div className="flex justify-between flex-col md:flex-row gap-4">
-              <div className="flex flex-row justify-start gap-2 w-4/5">
-                <img
-                  src={book.image}
-                  className="w-1/5 hidden md:block"
-                  alt=""
-                />
+              <div className="flex flex-col md:flex-row justify-start gap-2 w-4/5">
+                <img src={book.image} className="md:w-1/5" alt="" />
                 <div>
-                  <p className="text-5xl font-bold text-black">{book.name}</p>
-                  <div>
+                  <p
+                    className={`${
+                      darkMode ? "text-white" : "text-black"
+                    } text-5xl font-bold`}
+                  >
+                    {book.name}
+                  </p>
+                  <div className="flex flex-col gap-4">
                     <div className="p-2">
                       <CircularStatic
                         value={book.percentage}
@@ -72,6 +84,16 @@ export default function Book(props: { id: number }) {
                         </p>
                       </div>
                     )}
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-400">Author:</p>
+                      <p
+                        className={`${
+                          darkMode ? "text-white" : ""
+                        } font-medium text-xl`}
+                      >
+                        {book.author}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -92,6 +114,13 @@ export default function Book(props: { id: number }) {
                 </Button>
                 <Button
                   variant="contained"
+                  style={{ backgroundColor: "#13ae4b", color: "white" }}
+                  onClick={() => setAddComment(true)}
+                >
+                  <i className="fa fa-plus"></i>&nbsp;Add New Comment
+                </Button>
+                <Button
+                  variant="contained"
                   style={{ backgroundColor: "red", color: "white" }}
                   onClick={() => setDeleteBook(true)}
                 >
@@ -99,21 +128,17 @@ export default function Book(props: { id: number }) {
                 </Button>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <p className="text-gray-400">Author:</p>
-              <p className="font-medium text-xl">{book.author}</p>
-            </div>
             <div className="flex flex-col gap-6 md:flex-row justify-between">
               <div className="flex flex-col gap-6">
                 <div className="pt-6 flex gap-2 items-center">
                   <p className="text-gray-400">Pages:</p>
-                  <p className="text-2xl font-medium">
+                  <p
+                    className={`${
+                      darkMode ? "text-white" : ""
+                    } text-2xl font-medium`}
+                  >
                     {book.pagesRead} / {book.totalPages}
                   </p>
-                </div>
-                <div className="">
-                  <p className="text-gray-400">Comments:</p>
-                  <p className="text-2xl font-medium">{book.comment}</p>
                 </div>
                 {book.completed ? (
                   <div className="flex items-center gap-2">
@@ -140,18 +165,43 @@ export default function Book(props: { id: number }) {
               </div>
             </div>
           </div>
+          <div className={`${darkMode ? "text-gray-500" : ""}`}>
+            <p className="text-xl font-bold">Comments:</p>
+            <p
+              className={`${
+                darkMode ? "bg-gray-800 text-white" : "text-gray-500 bg-white"
+              } text-2xl mt-4 font-medium p-4 rounded-lg w-full`}
+            >
+              {book.comment}
+            </p>
+          </div>
         </div>
         <Popup open={updateBook} onClose={() => setUpdateBook(false)}>
-          <UpdateBook closeCB={() => setUpdateBook(false)} book={book} />
+          <UpdateBook
+            closeCB={() => setUpdateBook(false)}
+            book={book}
+            darkMode={darkMode}
+          />
         </Popup>
         <Popup open={updateStatus} onClose={() => setUpdateStatus(false)}>
           <UpdateBookStatus
             closeCB={() => setUpdateStatus(false)}
             book={book}
+            darkMode={darkMode}
           />
         </Popup>
         <Popup open={deleteBook} onClose={() => setDeleteBook(false)}>
-          <DeleteBook closeCB={() => setDeleteBook(false)} book={book} />
+          <DeleteBook
+            closeCB={() => setDeleteBook(false)}
+            book={book}
+            darkMode={darkMode}
+          />
+        </Popup>
+        <Popup open={addComment} onClose={() => setAddComment(false)}>
+          <AddComment
+            closeCB={() => setAddComment(false)}
+            darkMode={darkMode}
+          />
         </Popup>
       </div>
     </div>

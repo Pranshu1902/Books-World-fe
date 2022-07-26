@@ -53,7 +53,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row gap-4 pt-4 justify-between">
           <div
             className={`${
-              darkMode ? "bg-gray-700 text-white" : "bg-white"
+              darkMode ? "bg-gray-800 text-white" : "bg-white"
             } md:w-1/4 shadow rounded-lg p-6`}
           >
             <p className="text-gray-500 ">Books Read:</p>
@@ -75,7 +75,7 @@ export default function Home() {
             <Link
               href={`/book/${book.id}`}
               className={`${
-                darkMode ? "bg-gray-700" : "bg-white"
+                darkMode ? "bg-gray-800" : "bg-white"
               } flex gap-2 rounded-lg shadow p-2`}
             >
               <img
@@ -85,7 +85,7 @@ export default function Home() {
                 height={"10%"}
                 className="w-1/4"
               />
-              <div className="">
+              <div className="pl-4">
                 <p className="text-3xl font-bold">{book.name}</p>
                 <p className="pt-6">{book.author}</p>
                 <div className="text-3xl">

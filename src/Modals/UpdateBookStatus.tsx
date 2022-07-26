@@ -12,6 +12,7 @@ import { TailSpin } from "react-loader-spinner";
 export default function UpdateBookStatus(props: {
   closeCB: () => void;
   book: any;
+  darkMode: boolean;
 }) {
   const [status, setStatus] = useState(props.book.completed);
 
@@ -25,8 +26,8 @@ export default function UpdateBookStatus(props: {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-semibold text-blue-500 flex items-center justify-center">
+    <div className={`${props.darkMode ? "bg-gray-800 text-white" : ""} p-6`}>
+      <h1 className="text-4xl font-semibold flex items-center justify-center">
         Update Status
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col p-4 gap-6">
@@ -45,15 +46,15 @@ export default function UpdateBookStatus(props: {
           </div>
         </div>
         <div className="flex justify-between">
+          <Button variant="contained" onClick={() => props.closeCB()}>
+            Cancel
+          </Button>
           <Button
             variant="contained"
             type="submit"
-            style={{ backgroundColor: "#00D100", color: "white" }}
+            style={{ backgroundColor: "#13ae4b", color: "white" }}
           >
             Update
-          </Button>
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
           </Button>
         </div>
       </form>
