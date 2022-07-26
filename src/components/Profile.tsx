@@ -32,12 +32,12 @@ export default function Profile() {
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"
-        } p-4 min-h-screen`}
+        } p-4 min-h-screen transition duration-500`}
       >
         <p
           className={`${
             darkMode ? "text-white" : "text-gray-600"
-          } text-4xl font-bold pb-4`}
+          } text-4xl font-bold pb-4 transition duration-500`}
         >
           Profile
         </p>
@@ -47,7 +47,7 @@ export default function Profile() {
             <div
               className={`${
                 darkMode ? "text-white" : ""
-              } grid grid-cols-1 md:grid-cols-2 pt-6 gap-12`}
+              } grid grid-cols-1 md:grid-cols-2 pt-6 gap-12 transition duration-500`}
             >
               <div>
                 <p className="text-xl font-bold">First Name:</p>
@@ -55,7 +55,7 @@ export default function Profile() {
                   variant="outlined"
                   className={`${
                     darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg`}
+                  } shadow-lg transition duration-500`}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
@@ -66,7 +66,7 @@ export default function Profile() {
                   variant="outlined"
                   className={`${
                     darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg`}
+                  } shadow-lg transition duration-500`}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
@@ -77,7 +77,7 @@ export default function Profile() {
                   variant="outlined"
                   className={`${
                     darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg`}
+                  } shadow-lg transition duration-500`}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -88,7 +88,7 @@ export default function Profile() {
                   variant="outlined"
                   className={`${
                     darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg`}
+                  } shadow-lg transition duration-500`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

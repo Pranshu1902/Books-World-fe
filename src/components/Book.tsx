@@ -35,13 +35,13 @@ export default function Book(props: { id: number }) {
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"
-        } min-h-screen gap-2`}
+        } min-h-screen gap-2 transition duration-500`}
       >
         <div className="p-6 flex flex-col gap-6">
           <div
             className={`${
               darkMode ? "bg-gray-800 text-white" : "bg-white"
-            } flex flex-col gap-6 p-4 rounded-lg text-gray-500`}
+            } flex flex-col gap-6 p-4 rounded-lg text-gray-500 transition duration-500`}
           >
             <div className="flex justify-between flex-col md:flex-row gap-4">
               <div className="flex flex-col md:flex-row justify-start gap-2 w-4/5">
@@ -50,7 +50,7 @@ export default function Book(props: { id: number }) {
                   <p
                     className={`${
                       darkMode ? "text-white" : "text-black"
-                    } text-5xl font-bold`}
+                    } text-5xl font-bold transition duration-500`}
                   >
                     {book.name}
                   </p>
@@ -89,7 +89,7 @@ export default function Book(props: { id: number }) {
                       <p
                         className={`${
                           darkMode ? "text-white" : ""
-                        } font-medium text-xl`}
+                        } font-medium text-xl transition duration-500`}
                       >
                         {book.author}
                       </p>
@@ -165,12 +165,16 @@ export default function Book(props: { id: number }) {
               </div>
             </div>
           </div>
-          <div className={`${darkMode ? "text-gray-500" : ""}`}>
+          <div
+            className={`${
+              darkMode ? "text-gray-500" : ""
+            } transition duration-500`}
+          >
             <p className="text-xl font-bold">Comments:</p>
             <p
               className={`${
                 darkMode ? "bg-gray-800 text-white" : "text-gray-500 bg-white"
-              } text-2xl mt-4 font-medium p-4 rounded-lg w-full`}
+              } text-2xl mt-4 font-medium p-4 rounded-lg w-full transition duration-500`}
             >
               {book.comment}
             </p>

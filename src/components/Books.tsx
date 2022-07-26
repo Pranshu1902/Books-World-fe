@@ -32,13 +32,13 @@ export default function Books() {
       <div
         className={`${
           darkMode ? "bg-gray-900 text-white" : "bg-gray-100"
-        } p-4 min-h-screen`}
+        } p-4 min-h-screen transition duration-500`}
       >
         <div className="flex flex-col">
           <p
             className={`${
               darkMode ? "text-white" : "text-gray-500"
-            } text-4xl font-bold pb-4`}
+            } text-4xl font-bold pb-4 transition duration-500`}
           >
             Books
           </p>
@@ -46,7 +46,7 @@ export default function Books() {
             <div
               className={`${
                 darkMode ? "bg-gray-800" : "bg-white"
-              } shadow rounded-lg p-6 md:w-1/4`}
+              } shadow rounded-lg p-6 md:w-1/4 transition duration-500`}
             >
               <p className="text-gray-500">Total books:</p>
               <p className="text-6xl font-bold">
@@ -80,7 +80,7 @@ export default function Books() {
                 href={`/book/${book.id}`}
                 className={`${
                   darkMode ? "bg-gray-800" : "bg-white"
-                } flex flex-row gap-6 rounded-lg shadow p-2`}
+                } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500`}
               >
                 <div className="w-1/6 hidden md:block">
                   <img src={book.image} alt="" />

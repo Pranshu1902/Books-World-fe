@@ -28,13 +28,13 @@ export default function Home() {
       <div
         className={`${
           darkMode ? "bg-gray-900" : "bg-gray-100"
-        } p-4 min-h-screen gap-4`}
+        } p-4 min-h-screen gap-4 transition duration-500`}
       >
         <div className="flex flex-col md:flex-row justify-between gap-4">
           <p
             className={`${
               darkMode ? "text-white" : "text-gray-600"
-            } text-4xl font-bold pb-4`}
+            } text-4xl font-bold pb-4 transition duration-500`}
           >
             Home
           </p>
@@ -54,7 +54,7 @@ export default function Home() {
           <div
             className={`${
               darkMode ? "bg-gray-800 text-white" : "bg-white"
-            } md:w-1/4 shadow rounded-lg p-6`}
+            } md:w-1/4 shadow rounded-lg p-6 transition duration-500`}
           >
             <p className="text-gray-500 ">Books Read:</p>
             <p className="text-6xl font-bold">{"10"}</p>
@@ -63,7 +63,9 @@ export default function Home() {
             <TextField
               label="Search 🔎"
               variant="outlined"
-              className={`${darkMode ? "text-white" : ""} w-full md:w-auto`}
+              className={`${
+                darkMode ? "text-white" : ""
+              } w-full md:w-auto transition duration-500`}
               value={search}
               color={darkMode ? "secondary" : "primary"}
               onChange={(e) => setSearch(e.target.value)}
@@ -76,7 +78,7 @@ export default function Home() {
               href={`/book/${book.id}`}
               className={`${
                 darkMode ? "bg-gray-800" : "bg-white"
-              } flex gap-2 rounded-lg shadow p-2`}
+              } flex gap-2 rounded-lg shadow p-2 transition duration-500`}
             >
               <img
                 src={book.image}
