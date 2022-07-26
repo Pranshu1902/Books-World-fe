@@ -1,6 +1,8 @@
 import { navigate } from "raviger";
+import { bookType } from "../type/DataTypes";
 
 const baseURL = "https://books-world-pranshu1902.herokuapp.com/";
+// const baseURL = "http://127.0.0.1:8000/";
 
 type methods = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -56,4 +58,20 @@ export const login = async (username: string, password: string) => {
 export const signup = async (username: string, password: string) => {
   const data = { username: username, password: password };
   return request("POST", data, "user/");
+};
+
+export const getBooks = async () => {
+  return request("GET", {}, "books/");
+};
+
+export const addBook = async (data: any) => {
+  return request("POST", data, "books/");
+};
+
+export const getComments = async () => {
+  return request("GET", {}, "comment/");
+};
+
+export const addComment = async (data: any) => {
+  return request("POST", data, "comment/");
 };

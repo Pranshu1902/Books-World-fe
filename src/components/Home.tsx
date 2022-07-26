@@ -1,20 +1,33 @@
 import { Button, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { books, mode } from "../Common/Data";
+import { mode } from "../Common/Data";
 import CircularStatic from "../Common/CircularProgress";
 import { Link } from "raviger";
 import Header from "../Common/Header";
-import { tabs } from "../type/DataTypes";
+import { bookType, tabs } from "../type/DataTypes";
+import { getBooks } from "../api/ApiUtils";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(mode);
+
+  const emptyBooksArray: bookType[] = [];
+  const [books, setBooks] = useState(emptyBooksArray);
+
+  const fetchData = () => {
+    getBooks().then((data) => {
+      console.log(data);
+      setBooks(data);
+    });
+  };
 
   tabs.map((tab) => {
     tab.title === "Home" ? (tab.active = true) : (tab.active = false);
   });
 
   useEffect(() => {
+    fetchData();
+
     document.title = "Home | Book's World";
   }, []);
 
@@ -57,7 +70,7 @@ export default function Home() {
             } md:w-1/4 shadow rounded-lg p-6 transition duration-500`}
           >
             <p className="text-gray-500 ">Books Read:</p>
-            <p className="text-6xl font-bold">{"10"}</p>
+            <p className="text-6xl font-bold">{books.length}</p>
           </div>
           <div>
             <TextField
@@ -72,34 +85,46 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="pt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {books.map((book) => (
-            <Link
-              href={`/book/${book.id}`}
-              className={`${
-                darkMode ? "bg-gray-800" : "bg-white"
-              } flex gap-2 rounded-lg shadow p-2 transition duration-500`}
-            >
-              <img
-                src={book.image}
-                alt={book.name + " logo"}
-                width={"10%"}
-                height={"10%"}
-                className="w-1/4"
-              />
-              <div className="pl-4">
-                <p className="text-3xl font-bold">{book.name}</p>
-                <p className="pt-6">{book.author}</p>
-                <div className="text-3xl">
-                  <CircularStatic
-                    value={book.percentage}
-                    size={100}
-                    darkMode={darkMode}
-                  />
+        <div
+          className={`${
+            books.length > 0
+              ? "grid grid-cols-1 md:grid-cols-2"
+              : "flex justify-center items-center w-full"
+          } pt-12 gap-6`}
+        >
+          {books.length ? (
+            books.map((book: bookType) => (
+              <Link
+                href={`/book/${book.id}`}
+                className={`${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } flex gap-2 rounded-lg shadow p-2 transition duration-500`}
+              >
+                <img
+                  src={book.image}
+                  alt={book.name + " logo"}
+                  width={"10%"}
+                  height={"10%"}
+                  className="w-1/4"
+                />
+                <div className="pl-4">
+                  <p className="text-3xl font-bold">{book.name}</p>
+                  <p className="pt-6">{book.author}</p>
+                  <div className="text-3xl">
+                    <CircularStatic value={50} size={100} darkMode={darkMode} />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <div
+              className={`${
+                darkMode ? "text-white" : "text-gray-500"
+              } text-3xl font-bold`}
+            >
+              No Books Found
+            </div>
+          )}
         </div>
       </div>
     </div>

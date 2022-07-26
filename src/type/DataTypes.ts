@@ -11,6 +11,23 @@ export type linkType = {
   icon: string;
 };
 
+export type bookType = {
+  id: number;
+  name: string;
+  author: string;
+  image?: any;
+  totalPages: number;
+  pagesRead: number;
+  timeTaken: number;
+  status: string;
+};
+
+export type commentType = {
+  text: string;
+  created_at: Date;
+  book: bookType;
+};
+
 export const tabs: linkType[] = [
   {
     title: "Home",
