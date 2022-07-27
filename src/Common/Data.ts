@@ -87,4 +87,13 @@ export const books = [
   },
 ];
 
-export let mode = false;
+// export let mode = false;
+
+export const mode = () => {
+  if (localStorage.getItem("mode")) {
+    return localStorage.getItem("mode") === "dark";
+  } else {
+    localStorage.setItem("mode", "light");
+    return false;
+  }
+};

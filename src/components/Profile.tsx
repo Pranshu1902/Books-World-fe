@@ -1,5 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { me, updateUser } from "../api/ApiUtils";
 import { mode } from "../Common/Data";
 import Header from "../Common/Header";
 import Popup from "../Common/Popup";
@@ -7,6 +8,7 @@ import UpdatePassword from "../Modals/UpdatePassword";
 import { tabs } from "../type/DataTypes";
 
 export default function Profile() {
+  const [id, setId] = useState(0);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -19,7 +21,22 @@ export default function Profile() {
     tab.title === "Profile" ? (tab.active = true) : (tab.active = false);
   });
 
+  const updateUserInfo = () => {
+    updateUser(id, username, email, firstName, lastName, password);
+  };
+
   useEffect(() => {
+    me().then((data) => {
+      console.log(data);
+
+      setUsername(data.username);
+      setEmail(data.email);
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
+      setId(data.id);
+      setPassword(data.password);
+    });
+
     document.title = "Profile | Book's World";
   }, []);
 
@@ -95,7 +112,14 @@ export default function Profile() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-4 justify-center p-6 pt-12">
-            <Button variant="contained">Update Info</Button>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={updateUserInfo}
+              onSubmit={updateUserInfo}
+            >
+              Update Info
+            </Button>
             <Button
               variant="contained"
               style={{ backgroundColor: "#13ae4b", color: "white" }}

@@ -9,6 +9,11 @@ export default function Header(props: {
   darkMode: boolean;
   setDarkMode: (darkMode: boolean) => void;
 }) {
+  const updateDarkModeStatus = () => {
+    localStorage.setItem("mode", props.darkMode === true ? "light" : "dark");
+    props.setDarkMode(!props.darkMode);
+  };
+
   return (
     <div className="p-6 flex justify-between text-white">
       <div className="flex items-center gap-2">
@@ -33,7 +38,7 @@ export default function Header(props: {
         <div>
           <DarkModeSlider
             darkMode={props.darkMode}
-            setDarkMode={props.setDarkMode}
+            setDarkMode={updateDarkModeStatus}
           />
         </div>
       </div>
@@ -42,7 +47,7 @@ export default function Header(props: {
         <DropDown filters={props.tabs} />
         <DarkModeSlider
           darkMode={props.darkMode}
-          setDarkMode={props.setDarkMode}
+          setDarkMode={updateDarkModeStatus}
         />
       </div>
     </div>

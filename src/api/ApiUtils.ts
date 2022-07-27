@@ -114,3 +114,25 @@ export const updateBookStatus = async (status: string, book: any) => {
 export const deleteBook = async (bookId: number) => {
   return request("DELETE", {}, "books/" + bookId.toString() + "/");
 };
+
+export const me = async () => {
+  return request("GET", {}, "api/user/");
+};
+
+export const updateUser = async (
+  userID: number,
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string
+) => {
+  const data = {
+    username: username,
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    password: password,
+  };
+  return request("PUT", data, "user/" + userID.toString() + "/");
+};

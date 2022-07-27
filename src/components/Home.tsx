@@ -21,15 +21,23 @@ export default function Home() {
     });
   };
 
-  tabs.map((tab) => {
+  tabs.forEach((tab) => {
     tab.title === "Home" ? (tab.active = true) : (tab.active = false);
   });
 
   useEffect(() => {
     fetchData();
+    if (search.length) {
+      console.log("searching");
+      setBooks(
+        books.filter((book) =>
+          book.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
 
     document.title = "Home | Book's World";
-  }, []);
+  }, [books, search]);
 
   return (
     <div
