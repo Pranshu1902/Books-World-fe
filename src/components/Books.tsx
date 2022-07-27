@@ -2,11 +2,11 @@ import { Switch } from "@material-ui/core";
 import { Link } from "raviger";
 import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-import { getBooks } from "../api/ApiUtils";
+import { getBooks, getComments } from "../api/ApiUtils";
 import CircularStatic from "../Common/CircularProgress";
 import { books, mode } from "../Common/Data";
 import Header from "../Common/Header";
-import { bookType, tabs } from "../type/DataTypes";
+import { bookType, commentType, tabs } from "../type/DataTypes";
 
 export default function Books() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -16,9 +16,16 @@ export default function Books() {
   const emptyBooksArray: bookType[] = [];
   const [books, setBooks] = useState(emptyBooksArray);
 
+  const sampleComment: commentType[] = [];
+  const [comments, setComments] = useState(sampleComment);
+
   const fetchData = () => {
     getBooks().then((data) => {
       setBooks(data);
+    });
+
+    getComments().then((data) => {
+      setComments(data);
     });
   };
 
@@ -107,7 +114,18 @@ export default function Books() {
                     <p className="pt-6">{book.author}</p>
                   </div>
                   <div className="w-1/4 flex justify-center items-center">
-                    <p className="truncate">Comments: {"book.comment"}</p>
+                    <p
+                      className={`${
+                        darkMode ? "bg-gray-700" : "bg-gray-100"
+                      } rounded-full p-3 transition duration-500`}
+                    >
+                      Comments:{" "}
+                      {
+                        comments.filter(
+                          (comment) => Number(comment.book) === Number(book.id)
+                        ).length
+                      }
+                    </p>
                   </div>
                   <div className="w-1/4 flex justify-center items-center">
                     <div className="text-3xl w-1/3">
