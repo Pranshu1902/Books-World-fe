@@ -6,6 +6,8 @@ import { Link } from "raviger";
 import Header from "../Common/Header";
 import { bookType, tabs } from "../type/DataTypes";
 import { getBooks } from "../api/ApiUtils";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -37,7 +39,7 @@ export default function Home() {
     }
 
     document.title = "Home | Book's World";
-  }, [books, search]);
+  }, []);
 
   return (
     <div
@@ -96,7 +98,7 @@ export default function Home() {
         <div
           className={`${
             books.length > 0
-              ? "grid grid-cols-1 md:grid-cols-2"
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
               : "flex justify-center items-center w-full"
           } pt-12 gap-6`}
         >
@@ -117,9 +119,18 @@ export default function Home() {
                 />
                 <div className="pl-4">
                   <p className="text-3xl font-bold">{book.name}</p>
-                  <p className="pt-6">{book.author}</p>
-                  <div className="text-3xl">
-                    <CircularStatic value={50} size={100} darkMode={darkMode} />
+                  <div className="gap-4">
+                    <p className="pt-6">{book.author}</p>
+                    <div className="text-3xl w-1/3">
+                      <CircularProgressbar
+                        value={(book.pagesRead / book.totalPages) * 100}
+                        text={`${(book.pagesRead / book.totalPages) * 100}%`}
+                        styles={buildStyles({
+                          textColor: darkMode ? "white" : "#13ae4b",
+                          pathColor: "#13ae4b",
+                        })}
+                      />
+                    </div>
                   </div>
                 </div>
               </Link>

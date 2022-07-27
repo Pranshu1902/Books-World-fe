@@ -11,6 +11,7 @@ import DeleteBook from "../Modals/DeleteBook";
 import AddComment from "../Modals/AddComment";
 import moment from "moment";
 import { getBooks, getComments } from "../api/ApiUtils";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
@@ -100,11 +101,18 @@ export default function Book(props: { id: number }) {
                     </p>
                     <div className="flex flex-col gap-4">
                       <div className="p-2">
-                        <CircularStatic
-                          value={(book.pagesRead / book.totalPages) * 100}
-                          size={70}
-                          darkMode={darkMode}
-                        />
+                        <div className="text-3xl w-1/2 md:w-1/6">
+                          <CircularProgressbar
+                            value={(book.pagesRead / book.totalPages) * 100}
+                            text={`${
+                              (book.pagesRead / book.totalPages) * 100
+                            }%`}
+                            styles={buildStyles({
+                              textColor: darkMode ? "white" : "#13ae4b",
+                              pathColor: "#13ae4b",
+                            })}
+                          />
+                        </div>
                       </div>
                       {book.status === "Abandoned" ? (
                         <div className="flex gap-2">

@@ -1,6 +1,7 @@
 import { Switch } from "@material-ui/core";
 import { Link } from "raviger";
 import { useEffect, useState } from "react";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { getBooks } from "../api/ApiUtils";
 import CircularStatic from "../Common/CircularProgress";
 import { books, mode } from "../Common/Data";
@@ -108,8 +109,17 @@ export default function Books() {
                   <div className="w-1/4 flex justify-center items-center">
                     <p className="truncate">Comments: {"book.comment"}</p>
                   </div>
-                  <div className="w-1/4  flex justify-center items-center">
-                    <CircularStatic value={50} size={80} darkMode={darkMode} />
+                  <div className="w-1/4 flex justify-center items-center">
+                    <div className="text-3xl w-1/3">
+                      <CircularProgressbar
+                        value={(book.pagesRead / book.totalPages) * 100}
+                        text={`${(book.pagesRead / book.totalPages) * 100}%`}
+                        styles={buildStyles({
+                          textColor: darkMode ? "white" : "#13ae4b",
+                          pathColor: "#13ae4b",
+                        })}
+                      />
+                    </div>
                   </div>
                 </Link>
               ))
