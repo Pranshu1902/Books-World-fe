@@ -8,19 +8,21 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import { updateBookStatus } from "../api/ApiUtils";
 
 export default function UpdateBookStatus(props: {
   closeCB: () => void;
   book: any;
   darkMode: boolean;
 }) {
-  const [status, setStatus] = useState(props.book.completed);
+  const [status, setStatus] = useState(props.book.status);
 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: any) => {
     setLoading(true);
     event.preventDefault();
+    updateBookStatus(status, props.book);
     props.closeCB();
     setLoading(false);
   };
@@ -41,7 +43,7 @@ export default function UpdateBookStatus(props: {
             >
               <option value="Completed">Completed</option>
               <option value="Reading">Reading</option>
-              <option value="Aborted">Aborted</option>
+              <option value="Abandoned">Abandoned</option>
             </NativeSelect>
           </div>
         </div>

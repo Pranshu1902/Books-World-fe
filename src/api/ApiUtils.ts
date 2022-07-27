@@ -72,6 +72,45 @@ export const getComments = async () => {
   return request("GET", {}, "comment/");
 };
 
-export const addComment = async (data: any) => {
+export const addComment = async (comment: string, book: any) => {
+  const data = { text: comment, book: book.id };
   return request("POST", data, "comment/");
+};
+
+export const updateBook = async (
+  name: string,
+  author: string,
+  bookImage: any,
+  pagesRead: number,
+  pagesTotal: number,
+  time: number,
+  status: string,
+  bookId: number
+) => {
+  const data = {
+    id: bookId,
+    name: name,
+    // image: bookImage,
+    author: author,
+    pagesRead: pagesRead,
+    pagesTotal: pagesTotal,
+    timeTaken: time,
+    status: status,
+  };
+  return request("PUT", data, "books/" + bookId.toString() + "/");
+};
+
+export const updateBookStatus = async (status: string, book: any) => {
+  const data = {
+    id: book.id,
+    name: book.name,
+    author: book.author,
+    status: status,
+  };
+  console.log(data);
+  return request("PUT", data, "books/" + book.id.toString() + "/");
+};
+
+export const deleteBook = async (bookId: number) => {
+  return request("DELETE", {}, "books/" + bookId.toString() + "/");
 };

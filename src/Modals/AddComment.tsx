@@ -8,18 +8,25 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import { addComment } from "../api/ApiUtils";
 
 export default function AddComment(props: {
   closeCB: () => void;
   darkMode: boolean;
+  book: any;
 }) {
   const [loading, setLoading] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleSubmit = async (event: any) => {
-    setLoading(true);
-    event.preventDefault();
-    props.closeCB();
-    setLoading(false);
+    // validation
+    if (comment.length !== 0) {
+      setLoading(true);
+      event.preventDefault();
+      addComment(comment, props.book);
+      props.closeCB();
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,6 +44,8 @@ export default function AddComment(props: {
             variant="outlined"
             label="Comment"
             type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>

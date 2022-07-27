@@ -9,6 +9,7 @@ import UpdateBook from "../Modals/UpdateBook";
 import UpdateBookStatus from "../Modals/UpdateBookStatus";
 import DeleteBook from "../Modals/DeleteBook";
 import AddComment from "../Modals/AddComment";
+import moment from "moment";
 import { getBooks, getComments } from "../api/ApiUtils";
 
 export default function Book(props: { id: number }) {
@@ -50,7 +51,7 @@ export default function Book(props: { id: number }) {
       console.log(data);
       // filtering the comments for this book
       const thisComments: commentType[] = data.filter(
-        (comment: commentType) => Number(comment.book.id) === Number(props.id)
+        (comment: commentType) => Number(comment.book) === Number(props.id)
       );
       setComments(thisComments);
       setCommentLoading(false);
@@ -222,15 +223,20 @@ export default function Book(props: { id: number }) {
                 <div className="flex flex-col gap-4">
                   {comments.length ? (
                     comments.map((comment: commentType) => (
-                      <p
+                      <div
                         className={`${
                           darkMode
                             ? "bg-gray-800 text-white"
                             : "text-gray-500 bg-white"
-                        } text-2xl mt-4 font-medium p-4 rounded-lg w-full transition duration-500`}
+                        } text-2xl mt-4 font-medium p-4 rounded-lg w-full transition duration-500 flex flex-col md:flex-row justify-between`}
                       >
-                        {comment.text}
-                      </p>
+                        <p>{comment.text}</p>
+                        <p className="text-sm text-gray-500 flex items-end">
+                          {moment(comment.created_at).format(
+                            "hh:mm DD-MM-YYYY"
+                          )}
+                        </p>
+                      </div>
                     ))
                   ) : (
                     <div
@@ -273,6 +279,7 @@ export default function Book(props: { id: number }) {
           <AddComment
             closeCB={() => setAddComment(false)}
             darkMode={darkMode}
+            book={book}
           />
         </Popup>
       </div>

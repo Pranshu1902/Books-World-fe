@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import { updateBook } from "../api/ApiUtils";
 import DarkModeSlider from "../Common/DarkModeSlider";
 
 export default function UpdateBook(props: {
@@ -19,7 +20,7 @@ export default function UpdateBook(props: {
   const [author, setAuthor] = useState(props.book.author);
   const [pagesRead, setPagesRead] = useState(props.book.pagesRead);
   const [pagesTotal, setPagesTotal] = useState(props.book.totalPages);
-  const [time, setTime] = useState(props.book.completedIn);
+  const [time, setTime] = useState(props.book.timeTaken);
   const [status, setStatus] = useState(props.book.completed);
 
   const [loading, setLoading] = useState(false);
@@ -27,6 +28,16 @@ export default function UpdateBook(props: {
   const handleSubmit = async (event: any) => {
     setLoading(true);
     event.preventDefault();
+    updateBook(
+      name,
+      author,
+      props.book.image,
+      pagesRead,
+      pagesTotal,
+      time,
+      status,
+      props.book.id
+    );
     props.closeCB();
     setLoading(false);
   };
@@ -69,14 +80,14 @@ export default function UpdateBook(props: {
             <TextField
               value={pagesRead}
               title="Pages Read"
-              type="text"
-              onChange={(e) => setPagesTotal(e.target.value)}
+              type="number"
+              onChange={(e) => setPagesRead(e.target.value)}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
             /
             <TextField
               value={pagesTotal}
-              type="text"
+              type="number"
               title="Total Pages"
               name="Total Pages"
               onChange={(e) => setPagesTotal(e.target.value)}

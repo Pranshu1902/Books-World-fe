@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import { deleteBook } from "../api/ApiUtils";
 
 export default function DeleteBook(props: {
   closeCB: () => void;
@@ -21,6 +22,7 @@ export default function DeleteBook(props: {
   const handleSubmit = async (event: any) => {
     setLoading(true);
     event.preventDefault();
+    deleteBook(props.book.id);
     props.closeCB();
     setLoading(false);
   };
