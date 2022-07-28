@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { bookType, commentType, tabs } from "../type/DataTypes";
 import Header from "../Common/Header";
 import Popup from "../Common/Popup";
@@ -48,7 +48,7 @@ export default function Book(props: { id: number }) {
   const [loading, setLoading] = useState(true);
   const [commentLoading, setCommentLoading] = useState(true);
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     setLoading(true);
     getBooks().then((data) => {
       const displayBook: bookType = data.filter(
@@ -69,15 +69,15 @@ export default function Book(props: { id: number }) {
       setComments(thisComments);
       setCommentLoading(false);
     });
-  };
+  }, [props.id]);
 
-  tabs.map((tab) => {
+  tabs.forEach((tab) => {
     tab.title === "Books" ? (tab.active = true) : (tab.active = false);
   });
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="flex flex-col">
@@ -293,14 +293,20 @@ export default function Book(props: { id: number }) {
         )}
         <Popup open={updateBook} onClose={() => setUpdateBook(false)}>
           <UpdateBook
-            closeCB={() => setUpdateBook(false)}
+            closeCB={() => {
+              setUpdateBook(false);
+              fetchData();
+            }}
             book={book}
             darkMode={darkMode}
           />
         </Popup>
         <Popup open={updateStatus} onClose={() => setUpdateStatus(false)}>
           <UpdateBookStatus
-            closeCB={() => setUpdateStatus(false)}
+            closeCB={() => {
+              setUpdateStatus(false);
+              fetchData();
+            }}
             book={book}
             darkMode={darkMode}
           />
@@ -317,7 +323,10 @@ export default function Book(props: { id: number }) {
         </Popup>
         <Popup open={addComment} onClose={() => setAddComment(false)}>
           <AddComment
-            closeCB={() => setAddComment(false)}
+            closeCB={() => {
+              setAddComment(false);
+              fetchData();
+            }}
             darkMode={darkMode}
             book={book}
           />
@@ -327,7 +336,10 @@ export default function Book(props: { id: number }) {
           onClose={() => setEditComment({ ...editComment, edit: false })}
         >
           <EditComment
-            closeCB={() => setEditComment({ ...editComment, edit: false })}
+            closeCB={() => {
+              setEditComment({ ...editComment, edit: false });
+              fetchData();
+            }}
             darkMode={darkMode}
             commentId={editComment.id}
             comment={editComment.comment}

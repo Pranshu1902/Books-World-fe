@@ -17,33 +17,24 @@ export default function Home() {
   const emptyBooksArray: bookType[] = [];
   const [books, setBooks] = useState(emptyBooksArray);
 
-  const fetchData = () => {
-    setLoading(true);
-    getBooks().then((data) => {
-      console.log(data);
-      setBooks(data);
-      setLoading(false);
-    });
-  };
-
   tabs.forEach((tab) => {
     tab.title === "Home" ? (tab.active = true) : (tab.active = false);
   });
 
   useEffect(() => {
-    fetchData();
-    if (search.length) {
-      setLoading(true);
+    setLoading(true);
+    getBooks().then((data) => {
+      console.log(data);
       setBooks(
-        books.filter((book) =>
+        data.filter((book: bookType) =>
           book.name.toLowerCase().includes(search.toLowerCase())
         )
       );
       setLoading(false);
-    }
+    });
 
     document.title = "Home | Book's World";
-  }, []);
+  }, [search]);
 
   return (
     <div

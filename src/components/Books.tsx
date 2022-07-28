@@ -10,7 +10,7 @@ import { bookType, commentType, tabs } from "../type/DataTypes";
 
 export default function Books() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
-  const [completed, setCompleted] = useState(true);
+  const [completed, setCompleted] = useState(false);
   const [darkMode, setDarkMode] = useState(mode);
   const [loading, setLoading] = useState(true);
 
@@ -78,7 +78,7 @@ export default function Books() {
               </p>
             </div>
             <div className="flex gap-2 justify-center items-center">
-              <p>Completed</p>
+              <p>Reading</p>
               <Switch
                 {...label}
                 defaultChecked={completed}
@@ -86,7 +86,7 @@ export default function Books() {
                 onChange={() => setCompleted(!completed)}
                 color="primary"
               />
-              <p>Reading</p>
+              <p>Completed</p>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function Books() {
                   } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500`}
                 >
                   <div className="w-1/6 hidden md:block">
-                    <img src={book.imageLink} alt="" />
+                    <img src={book.imageLink} alt={`${book.name} logo`} />
                   </div>
                   <div className="w-1/2 pl-2">
                     <p className="text-3xl font-bold">{book.name}</p>
