@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { linkType } from "../type/DataTypes";
-import { Link } from "raviger";
+import { Link, navigate } from "raviger";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -9,6 +9,11 @@ function classNames(...classes: any[]) {
 
 export default function DropDown(props: { filters: linkType[] }) {
   const [filter, setFilter] = useState(props.filters);
+
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <Menu as="div" className="relative w-3/4 inline-block text-left">
@@ -66,6 +71,14 @@ export default function DropDown(props: { filters: linkType[] }) {
                 </Link>
               </Menu.Item>
             ))}
+            <Menu.Item>
+              <div
+                onClick={logoutUser}
+                className="text-red-500 hover:font-bold hover:bg-red-300 cursor-pointer flex items-center px-4 py-2 "
+              >
+                Logout
+              </div>
+            </Menu.Item>
           </div>
         </Menu.Items>
       </Transition>

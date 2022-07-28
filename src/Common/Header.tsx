@@ -1,4 +1,4 @@
-import { Link } from "raviger";
+import { Link, navigate } from "raviger";
 import logo from "../images/logo.png";
 import DropDown from "../Common/DropDown";
 import { linkType } from "../type/DataTypes";
@@ -12,6 +12,11 @@ export default function Header(props: {
   const updateDarkModeStatus = () => {
     localStorage.setItem("mode", props.darkMode === true ? "light" : "dark");
     props.setDarkMode(!props.darkMode);
+  };
+
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -40,6 +45,12 @@ export default function Header(props: {
             darkMode={props.darkMode}
             setDarkMode={updateDarkModeStatus}
           />
+        </div>
+        <div
+          onClick={logoutUser}
+          className="text-red-500 hover:text-red-700 cursor-pointer flex justify-center items-center"
+        >
+          Logout
         </div>
       </div>
       {/* Mobile view */}
