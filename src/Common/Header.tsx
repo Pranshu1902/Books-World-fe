@@ -26,21 +26,21 @@ export default function Header(props: {
         <p className="text-2xl font-bold">Book's World</p>
       </a>
       {/* Desktop View */}
-      <div className="hidden fadeIn md:flex gap-2">
-        <div className="flex flex-row gap-12 text-xl justify-end text-green-300">
+      <div className="hidden md:flex gap-2">
+        <div className="flex flex-row gap-6 text-xl justify-end text-green-300">
           {props.tabs.map((tab, index) => (
             <Link
               key={index}
               href={tab.link}
               className={`${
                 tab.active ? "text-white" : ""
-              } hover:text-white hover:bg-green-700 rounded-lg p-2 transition duration-500`}
+              } hover:text-white hover:bg-green-700 rounded-lg p-2 transition duration-500 flex gap-1 justify-center items-center`}
             >
               <i className={tab.icon}></i> {tab.title}
             </Link>
           ))}
         </div>
-        <div>
+        <div className="w-full">
           <DarkModeSlider
             darkMode={props.darkMode}
             setDarkMode={updateDarkModeStatus}
