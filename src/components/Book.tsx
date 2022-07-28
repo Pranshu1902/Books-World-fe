@@ -107,7 +107,7 @@ export default function Book(props: { id: number }) {
             >
               <div className="flex justify-between flex-col md:flex-row gap-4">
                 <div className="flex flex-col md:flex-row justify-start gap-2 w-4/5">
-                  <img src={"book.image"} className="md:w-1/5" alt="" />
+                  <img src={book.imageLink} className="md:w-1/2" alt="" />
                   <div>
                     <p
                       className={`${

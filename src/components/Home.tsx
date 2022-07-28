@@ -126,13 +126,11 @@ export default function Home() {
                 } flex gap-2 rounded-lg shadow p-2 transition duration-500 hover:scale-105`}
               >
                 <img
-                  src={book.image}
+                  src={book.imageLink}
                   alt={book.name + " logo"}
-                  width={"10%"}
-                  height={"10%"}
-                  className="w-1/4"
+                  className="w-1/3"
                 />
-                <div className="pl-4">
+                <div className="pl-4 w-2/3">
                   <p className="text-3xl font-bold">{book.name}</p>
                   <div className="gap-4">
                     <p className="pt-6">{book.author}</p>

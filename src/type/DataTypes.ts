@@ -16,6 +16,7 @@ export type bookType = {
   name: string;
   author: string;
   image?: any;
+  imageLink?: string;
   totalPages: number;
   pagesRead: number;
   timeTaken: number;

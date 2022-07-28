@@ -119,7 +119,7 @@ export default function Books() {
                   } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500`}
                 >
                   <div className="w-1/6 hidden md:block">
-                    <img src={book.image} alt="" />
+                    <img src={book.imageLink} alt="" />
                   </div>
                   <div className="w-1/2 pl-2">
                     <p className="text-3xl font-bold">{book.name}</p>

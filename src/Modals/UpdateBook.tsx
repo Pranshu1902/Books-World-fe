@@ -22,7 +22,6 @@ export default function UpdateBook(props: {
     updateBook(
       name,
       author,
-      props.book.image,
       pagesRead,
       pagesTotal,
       time,

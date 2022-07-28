@@ -13,8 +13,21 @@ export default function AddBook() {
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("Reading");
   const [pages, setPages] = useState(0);
-  const [image, setImage] = useState();
+  // const [image, setImage] = useState({
+  //   title: "",
+  //   content: "",
+  //   image: null,
+  // });
+  const [imageLink, setImageLink] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // const onChangePicture = (e: any) => {
+  //   if (e.target.files[0]) {
+  //     console.log("picture: ", e.target.files);
+  //     const file = e.target.files[0];
+  //     setImage({ title: file.name, content: file, image: file });
+  //   }
+  // };
 
   tabs.forEach((tab) => {
     tab.title === "Books" ? (tab.active = true) : (tab.active = false);
@@ -31,6 +44,7 @@ export default function AddBook() {
       setLoading(true);
       const book = {
         name: name,
+        imageLink: imageLink,
         author: author,
         status: status,
         totalPages: pages,
@@ -136,7 +150,7 @@ export default function AddBook() {
                 >
                   <option value="Completed">Completed</option>
                   <option value="Reading">Reading</option>
-                  <option value="Aborted">Aborted</option>
+                  <option value="Abandoned">Abandoned</option>
                 </NativeSelect>
               </div>
             </div>
@@ -146,9 +160,20 @@ export default function AddBook() {
                   darkMode ? "text-white" : "text-gray-500"
                 } text-xl font-bold`}
               >
-                Image:
+                Image Link:
               </p>
-              <input type="file" />
+              {/* <input
+                type="file"
+                // value={image}
+                onChange={onChangePicture}
+              /> */}
+              <TextField
+                type="text"
+                value={imageLink}
+                onChange={(e) => setImageLink(e.target.value)}
+                variant="outlined"
+                fullWidth
+              />
             </div>
             {loading ? (
               <div className="flex justify-center items-center pt-16">
@@ -161,7 +186,14 @@ export default function AddBook() {
               </div>
             ) : (
               <div className="pt-16 flex flex-col md:flex-row gap-4 justify-between">
-                <Button variant="contained">Cancel</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate("/home");
+                  }}
+                >
+                  Cancel
+                </Button>
                 <Button
                   variant="contained"
                   type="submit"
