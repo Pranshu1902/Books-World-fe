@@ -2,6 +2,7 @@ import { Switch } from "@material-ui/core";
 import { Link } from "raviger";
 import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import { TailSpin } from "react-loader-spinner";
 import { getBooks, getComments } from "../api/ApiUtils";
 import CircularStatic from "../Common/CircularProgress";
 import { books, mode } from "../Common/Data";
@@ -12,6 +13,7 @@ export default function Books() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [completed, setCompleted] = useState(true);
   const [darkMode, setDarkMode] = useState(mode);
+  const [loading, setLoading] = useState(true);
 
   const emptyBooksArray: bookType[] = [];
   const [books, setBooks] = useState(emptyBooksArray);
@@ -20,12 +22,14 @@ export default function Books() {
   const [comments, setComments] = useState(sampleComment);
 
   const fetchData = () => {
+    setLoading(true);
     getBooks().then((data) => {
       setBooks(data);
     });
 
     getComments().then((data) => {
       setComments(data);
+      setLoading(false);
     });
   };
 
@@ -65,13 +69,13 @@ export default function Books() {
             >
               <p className="text-gray-500">Total books:</p>
               <p className="text-6xl font-bold">
-                {
-                  books.filter((book: bookType) =>
-                    completed
-                      ? book.status === "Completed"
-                      : book.status !== "Completed"
-                  ).length
-                }
+                {books.length
+                  ? books.filter((book: bookType) =>
+                      completed
+                        ? book.status === "Completed"
+                        : book.status !== "Completed"
+                    ).length
+                  : 0}
               </p>
             </div>
             <div className="flex gap-2 justify-center items-center">
@@ -88,11 +92,20 @@ export default function Books() {
           </div>
         </div>
         <div className="pt-12 flex flex-col gap-6">
-          {books.filter((book: bookType) =>
-            completed
-              ? book.status === "Completed"
-              : book.status !== "Completed"
-          ).length ? (
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <TailSpin
+                color="#13ae4b"
+                height={70}
+                width={70}
+                ariaLabel="loading-indicator"
+              />
+            </div>
+          ) : books.filter((book: bookType) =>
+              completed
+                ? book.status === "Completed"
+                : book.status !== "Completed"
+            ).length ? (
             books
               .filter((book: bookType) =>
                 completed

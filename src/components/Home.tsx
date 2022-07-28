@@ -8,18 +8,22 @@ import { bookType, tabs } from "../type/DataTypes";
 import { getBooks } from "../api/ApiUtils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { TailSpin } from "react-loader-spinner";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(mode);
+  const [loading, setLoading] = useState(true);
 
   const emptyBooksArray: bookType[] = [];
   const [books, setBooks] = useState(emptyBooksArray);
 
   const fetchData = () => {
+    setLoading(true);
     getBooks().then((data) => {
       console.log(data);
       setBooks(data);
+      setLoading(false);
     });
   };
 
@@ -30,12 +34,13 @@ export default function Home() {
   useEffect(() => {
     fetchData();
     if (search.length) {
-      console.log("searching");
+      setLoading(true);
       setBooks(
         books.filter((book) =>
           book.name.toLowerCase().includes(search.toLowerCase())
         )
       );
+      setLoading(false);
     }
 
     document.title = "Home | Book's World";
@@ -80,7 +85,9 @@ export default function Home() {
             } md:w-1/4 shadow rounded-lg p-6 transition duration-500`}
           >
             <p className="text-gray-500 ">Books Read:</p>
-            <p className="text-6xl font-bold">{books.length}</p>
+            <p className="text-6xl font-bold">
+              {books.length ? books.length : 0}
+            </p>
           </div>
           <div>
             <TextField
@@ -102,7 +109,16 @@ export default function Home() {
               : "flex justify-center items-center w-full"
           } pt-12 gap-6`}
         >
-          {books.length ? (
+          {loading ? (
+            <div>
+              <TailSpin
+                color="#13ae4b"
+                height={70}
+                width={70}
+                ariaLabel="loading-indicator"
+              />
+            </div>
+          ) : books.length ? (
             books.map((book: bookType) => (
               <Link
                 href={`/book/${book.id}`}

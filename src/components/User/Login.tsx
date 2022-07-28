@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
     <div className="h-screen flex flex-col md:flex-row">
-      <div className="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center  bg-[#109908] text-white">
+      <div className="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center  bg-[#13ae4b] text-white">
         <div className="flex gap-4 w-full justify-center items-center">
           <img src={logo} alt="" width={"10%"} />
           <div className="text-5xl font-bold">Book's World</div>
@@ -68,9 +68,9 @@ export default function Login() {
             </div>
           )}
           {loading ? (
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center mt-8">
               <TailSpin
-                color="#00BFFF"
+                color="#13ae4b"
                 height={50}
                 width={50}
                 ariaLabel="loading-indicator"
@@ -80,7 +80,7 @@ export default function Login() {
             <button
               disabled={password.length === 0 || username.length === 0}
               type="submit"
-              className="mt-8 bg-[#12c408] rounded-lg p-3 hover:bg-green-700 transition duration-200 w-full font-bold text-white"
+              className="cursor-pointer mt-8 bg-[#13ae4b] rounded-lg p-3 hover:bg-green-800 transition duration-200 w-full font-bold text-white"
             >
               Login
             </button>

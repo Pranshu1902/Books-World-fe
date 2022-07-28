@@ -44,7 +44,7 @@ export default function Signup() {
 
   return (
     <div className="h-screen flex flex-col md:flex-row">
-      <div className="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center  bg-[#109908] text-white">
+      <div className="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center  bg-[#13ae4b] text-white">
         <div className="flex gap-4 w-full justify-center items-center">
           <img src={logo} alt="" width={"10%"} />
           <div className="text-5xl font-bold">Book's World</div>
@@ -98,7 +98,7 @@ export default function Signup() {
           {loading ? (
             <div className="flex justify-center items-center">
               <TailSpin
-                color="#00BFFF"
+                color="#13ae4b"
                 height={50}
                 width={50}
                 ariaLabel="loading-indicator"
@@ -112,7 +112,7 @@ export default function Signup() {
                 confirmPassword.length === 0
               }
               type="submit"
-              className="mt-12 bg-[#12c408] rounded-lg p-3 hover:bg-green-700 transition duration-200 w-full font-bold text-white"
+              className="mt-12 bg-[#13ae4b] rounded-lg p-3 hover:bg-green-800 cursor-pointer transition duration-200 w-full font-bold text-white"
             >
               Sign up
             </button>
