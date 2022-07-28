@@ -1,24 +1,22 @@
-import Dashboard from "../Common/Dashboard";
 import { Button, NativeSelect, TextField } from "@material-ui/core";
-import React, { useState } from "react";
-import { books, mode } from "../Common/Data";
-import CircularStatic from "../Common/CircularProgress";
-import { Link, navigate } from "raviger";
+import { useState } from "react";
+import { mode } from "../Common/Data";
+import { navigate } from "raviger";
 import Header from "../Common/Header";
 import { tabs } from "../type/DataTypes";
-import { imageListClasses } from "@mui/material";
 import { addBook } from "../api/ApiUtils";
+import { TailSpin } from "react-loader-spinner";
 
 export default function AddBook() {
-  const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(mode);
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("Reading");
   const [pages, setPages] = useState(0);
   const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false);
 
-  tabs.map((tab) => {
+  tabs.forEach((tab) => {
     tab.title === "Books" ? (tab.active = true) : (tab.active = false);
   });
 
@@ -30,6 +28,7 @@ export default function AddBook() {
       alert("Please fill all the fields");
       return;
     } else {
+      setLoading(true);
       const book = {
         name: name,
         author: author,
@@ -38,6 +37,7 @@ export default function AddBook() {
       };
       addBook(book).then((data) => {
         console.log(data);
+        setLoading(false);
         navigate("/home");
       });
     }
@@ -150,16 +150,27 @@ export default function AddBook() {
               </p>
               <input type="file" />
             </div>
-            <div className="pt-16 flex flex-col md:flex-row gap-4 justify-between">
-              <Button variant="contained">Cancel</Button>
-              <Button
-                variant="contained"
-                type="submit"
-                style={{ backgroundColor: "#13ae4b", color: "white" }}
-              >
-                Create Book
-              </Button>
-            </div>
+            {loading ? (
+              <div className="flex justify-center items-center pt-16">
+                <TailSpin
+                  color="#13ae4b"
+                  height={40}
+                  width={40}
+                  ariaLabel="loading-indicator"
+                />
+              </div>
+            ) : (
+              <div className="pt-16 flex flex-col md:flex-row gap-4 justify-between">
+                <Button variant="contained">Cancel</Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{ backgroundColor: "#13ae4b", color: "white" }}
+                >
+                  Create Book
+                </Button>
+              </div>
+            )}
           </form>
         </div>
       </div>

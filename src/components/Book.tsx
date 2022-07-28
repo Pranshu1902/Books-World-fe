@@ -1,7 +1,5 @@
 import { Button, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
-// import { books } from "../Common/Data";
-import CircularStatic from "../Common/CircularProgress";
 import { bookType, commentType, tabs } from "../type/DataTypes";
 import Header from "../Common/Header";
 import Popup from "../Common/Popup";
@@ -246,7 +244,7 @@ export default function Book(props: { id: number }) {
                   <CircularProgress color="primary" />
                 </div>
               ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                   {comments.length ? (
                     comments.map((comment: commentType) => (
                       <div
@@ -254,7 +252,7 @@ export default function Book(props: { id: number }) {
                           darkMode
                             ? "bg-gray-800 text-white"
                             : "text-gray-500 bg-white"
-                        } text-2xl mt-4 font-medium p-4 rounded-lg w-full transition duration-500 flex flex-col md:flex-row justify-between`}
+                        } text-2xl font-medium shadow p-4 rounded-lg w-full transition duration-500 flex flex-col md:flex-row justify-between`}
                       >
                         <p>{comment.text}</p>
                         <div className="flex flex-col gap-1 items-end">

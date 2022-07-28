@@ -1,6 +1,5 @@
 import { Switch } from "@material-ui/core";
 import { useState } from "react";
-import { books } from "../Common/Data";
 import Header from "../Common/Header";
 import { tabs } from "../type/DataTypes";
 
@@ -34,14 +33,14 @@ export default function History() {
           </div>
         </div>
         <div className="flex flex-col gap-4 pt-12">
-          {books
+          {/* {books
             .filter((book) => (completed ? book.completed : !book.completed))
             .map((book) => (
               <div className="bg-white rounded-lg p-2">
                 <p className="text-3xl font-bold">{book.name}</p>
                 <p className="pt-6">{book.author}</p>
               </div>
-            ))}
+            ))} */}
         </div>
       </div>
     </div>

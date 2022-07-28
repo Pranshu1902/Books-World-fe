@@ -1,4 +1,4 @@
-import { Dialog, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 
 export default function Notification(props: {
   message: string;

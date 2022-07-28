@@ -1,11 +1,4 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { addComment } from "../api/ApiUtils";
@@ -23,9 +16,10 @@ export default function AddComment(props: {
     if (comment.length !== 0) {
       setLoading(true);
       event.preventDefault();
-      addComment(comment, props.book);
-      props.closeCB();
-      setLoading(false);
+      addComment(comment, props.book).then(() => {
+        props.closeCB();
+        setLoading(false);
+      });
     }
   };
 
@@ -49,18 +43,29 @@ export default function AddComment(props: {
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>
-        <div className="flex justify-between">
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ backgroundColor: "#13ae4b", color: "white" }}
-          >
-            Add
-          </Button>
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <TailSpin
+              color="#13ae4b"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <Button variant="contained" onClick={() => props.closeCB()}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ backgroundColor: "#13ae4b", color: "white" }}
+            >
+              Add
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -1,7 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { mode } from "../Common/Data";
-import CircularStatic from "../Common/CircularProgress";
 import { Link } from "raviger";
 import Header from "../Common/Header";
 import { bookType, tabs } from "../type/DataTypes";

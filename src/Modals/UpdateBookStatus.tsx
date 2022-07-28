@@ -1,11 +1,4 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Button, NativeSelect } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateBookStatus } from "../api/ApiUtils";
@@ -22,9 +15,10 @@ export default function UpdateBookStatus(props: {
   const handleSubmit = async (event: any) => {
     setLoading(true);
     event.preventDefault();
-    updateBookStatus(status, props.book);
-    props.closeCB();
-    setLoading(false);
+    updateBookStatus(status, props.book).then(() => {
+      props.closeCB();
+      setLoading(false);
+    });
   };
 
   return (
@@ -47,18 +41,29 @@ export default function UpdateBookStatus(props: {
             </NativeSelect>
           </div>
         </div>
-        <div className="flex justify-between">
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ backgroundColor: "#13ae4b", color: "white" }}
-          >
-            Update
-          </Button>
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <TailSpin
+              color="#13ae4b"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <Button variant="contained" onClick={() => props.closeCB()}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ backgroundColor: "#13ae4b", color: "white" }}
+            >
+              Update
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

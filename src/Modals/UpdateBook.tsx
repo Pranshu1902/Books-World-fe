@@ -1,15 +1,7 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateBook } from "../api/ApiUtils";
-import DarkModeSlider from "../Common/DarkModeSlider";
 
 export default function UpdateBook(props: {
   closeCB: () => void;
@@ -21,13 +13,12 @@ export default function UpdateBook(props: {
   const [pagesRead, setPagesRead] = useState(props.book.pagesRead);
   const [pagesTotal, setPagesTotal] = useState(props.book.totalPages);
   const [time, setTime] = useState(props.book.timeTaken);
-  const [status, setStatus] = useState(props.book.completed);
 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: any) => {
-    setLoading(true);
     event.preventDefault();
+    setLoading(true);
     updateBook(
       name,
       author,
@@ -35,11 +26,12 @@ export default function UpdateBook(props: {
       pagesRead,
       pagesTotal,
       time,
-      status,
+      props.book.status,
       props.book.id
-    );
-    props.closeCB();
-    setLoading(false);
+    ).then(() => {
+      props.closeCB();
+      setLoading(false);
+    });
   };
 
   return (
@@ -107,18 +99,29 @@ export default function UpdateBook(props: {
             />
           </div>
         </div>
-        <div className="flex justify-between">
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ backgroundColor: "#13ae4b", color: "white" }}
-          >
-            Update
-          </Button>
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <TailSpin
+              color="#13ae4b"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <Button variant="contained" onClick={() => props.closeCB()}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ backgroundColor: "#13ae4b", color: "white" }}
+            >
+              Update
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

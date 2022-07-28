@@ -1,6 +1,3 @@
-import { navigate } from "raviger";
-import { bookType } from "../type/DataTypes";
-
 const baseURL = "https://books-world-pranshu1902.herokuapp.com/";
 // const baseURL = "http://127.0.0.1:8000/";
 
@@ -144,4 +141,19 @@ export const updateUser = async (
     password: password,
   };
   return request("PUT", data, "user/" + userID.toString() + "/");
+};
+
+export const updatePassword = async (
+  newPassword: string,
+  userId: number,
+  user: any
+) => {
+  const data = {
+    username: user.username,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    password: newPassword,
+  };
+  return request("PUT", data, "user/" + userId.toString() + "/");
 };

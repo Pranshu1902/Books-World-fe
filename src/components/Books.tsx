@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { TailSpin } from "react-loader-spinner";
 import { getBooks, getComments } from "../api/ApiUtils";
-import CircularStatic from "../Common/CircularProgress";
-import { books, mode } from "../Common/Data";
+import { mode } from "../Common/Data";
 import Header from "../Common/Header";
 import { bookType, commentType, tabs } from "../type/DataTypes";
 
@@ -33,7 +32,7 @@ export default function Books() {
     });
   };
 
-  tabs.map((tab) => {
+  tabs.forEach((tab) => {
     tab.title === "Books" ? (tab.active = true) : (tab.active = false);
   });
 

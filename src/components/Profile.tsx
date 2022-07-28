@@ -17,7 +17,9 @@ export default function Profile() {
   const [updatePass, setUpdatePass] = useState(false);
   const [darkMode, setDarkMode] = useState(mode);
 
-  tabs.map((tab) => {
+  const [user, setUser] = useState(null);
+
+  tabs.forEach((tab) => {
     tab.title === "Profile" ? (tab.active = true) : (tab.active = false);
   });
 
@@ -35,6 +37,8 @@ export default function Profile() {
       setLastName(data.lastName);
       setId(data.id);
       setPassword(data.password);
+
+      setUser(data);
     });
 
     document.title = "Profile | Book's World";
@@ -133,6 +137,8 @@ export default function Profile() {
           <UpdatePassword
             closeCB={() => setUpdatePass(false)}
             darkMode={darkMode}
+            userId={id}
+            user={user}
           />
         </Popup>
       </div>

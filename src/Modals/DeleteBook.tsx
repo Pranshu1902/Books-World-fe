@@ -1,11 +1,4 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { deleteBook } from "../api/ApiUtils";
@@ -15,16 +8,15 @@ export default function DeleteBook(props: {
   book: any;
   darkMode: boolean;
 }) {
-  const [status, setStatus] = useState(props.book.completed);
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: any) => {
     setLoading(true);
     event.preventDefault();
-    deleteBook(props.book.id);
-    props.closeCB();
-    setLoading(false);
+    deleteBook(props.book.id).then(() => {
+      props.closeCB();
+      setLoading(false);
+    });
   };
 
   return (
@@ -36,18 +28,29 @@ export default function DeleteBook(props: {
             Are you sure you want to delete book: <b>{props.book.name}</b>?
           </p>
         </div>
-        <div className="flex justify-between">
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ backgroundColor: "red", color: "white" }}
-          >
-            Delete
-          </Button>
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <TailSpin
+              color="red"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <Button variant="contained" onClick={() => props.closeCB()}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ backgroundColor: "red", color: "white" }}
+            >
+              Delete
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

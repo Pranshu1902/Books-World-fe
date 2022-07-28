@@ -1,25 +1,28 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+// import { updatePassword } from "../api/ApiUtils";
 
 export default function UpdatePassword(props: {
   closeCB: () => void;
   darkMode: boolean;
+  userId: number;
+  user: any;
 }) {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: any) => {
-    setLoading(true);
-    event.preventDefault();
-    props.closeCB();
-    setLoading(false);
+    if (confirmNewPassword === newPassword) {
+      setLoading(true);
+      event.preventDefault();
+      // updatePassword(newPassword, props.userId, props.user).then(() => {
+      //   props.closeCB();
+      //   setLoading(false);
+      // });
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,28 +39,43 @@ export default function UpdatePassword(props: {
           <TextField
             variant="outlined"
             label="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
             type="password"
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
           <TextField
             variant="outlined"
             label="Confirm New Password"
+            value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)}
             type="password"
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>
-        <div className="flex justify-between">
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{ backgroundColor: "#13ae4b", color: "white" }}
-          >
-            Update
-          </Button>
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <TailSpin
+              color="#13ae4b"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <Button variant="contained" onClick={() => props.closeCB()}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ backgroundColor: "#13ae4b", color: "white" }}
+            >
+              Update
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

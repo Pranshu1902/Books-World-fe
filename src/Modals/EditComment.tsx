@@ -1,15 +1,7 @@
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-  TextField,
-} from "@material-ui/core";
-import { log } from "console";
-import { useEffect, useState } from "react";
+import { Button, TextField } from "@material-ui/core";
+import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
-import { addComment, getComments, updateComment } from "../api/ApiUtils";
+import { updateComment } from "../api/ApiUtils";
 import { commentType } from "../type/DataTypes";
 
 export default function EditComment(props: {
