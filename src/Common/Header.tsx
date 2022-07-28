@@ -21,10 +21,10 @@ export default function Header(props: {
 
   return (
     <div className="p-6 flex justify-between text-white">
-      <div className="flex items-center gap-2">
+      <a href="/" className="flex items-center gap-2">
         <img src={logo} alt="" width={"10%"} />
         <p className="text-2xl font-bold">Book's World</p>
-      </div>
+      </a>
       {/* Desktop View */}
       <div className="hidden fadeIn md:flex gap-2">
         <div className="flex flex-row gap-12 text-xl justify-end text-green-300">
