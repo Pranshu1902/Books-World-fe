@@ -12,6 +12,7 @@ import { getBooks, getComments } from "../api/ApiUtils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { TailSpin } from "react-loader-spinner";
 import EditComment from "../Modals/EditComment";
+import { navigate } from "raviger";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
@@ -306,7 +307,10 @@ export default function Book(props: { id: number }) {
         </Popup>
         <Popup open={deleteBook} onClose={() => setDeleteBook(false)}>
           <DeleteBook
-            closeCB={() => setDeleteBook(false)}
+            closeCB={() => {
+              setDeleteBook(false);
+              navigate("/books");
+            }}
             book={book}
             darkMode={darkMode}
           />
