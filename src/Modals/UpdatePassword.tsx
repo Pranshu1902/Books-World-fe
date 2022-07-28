@@ -47,15 +47,15 @@ export default function UpdatePassword(props: {
           />
         </div>
         <div className="flex justify-between">
+          <Button variant="contained" onClick={() => props.closeCB()}>
+            Cancel
+          </Button>
           <Button
             variant="contained"
             type="submit"
             style={{ backgroundColor: "#13ae4b", color: "white" }}
           >
             Update
-          </Button>
-          <Button variant="contained" onClick={() => props.closeCB()}>
-            Cancel
           </Button>
         </div>
       </form>

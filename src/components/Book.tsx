@@ -12,6 +12,7 @@ import AddComment from "../Modals/AddComment";
 import moment from "moment";
 import { getBooks, getComments } from "../api/ApiUtils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import { TailSpin } from "react-loader-spinner";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
@@ -79,7 +80,12 @@ export default function Book(props: { id: number }) {
       >
         {loading ? (
           <div className="flex justify-center items-center w-full h-screen">
-            <CircularProgress color="primary" />
+            <TailSpin
+              color="#13ae4b"
+              height={50}
+              width={50}
+              ariaLabel="loading-indicator"
+            />
           </div>
         ) : (
           <div className="p-6 flex flex-col gap-6">
@@ -252,7 +258,7 @@ export default function Book(props: { id: number }) {
                         darkMode
                           ? "text-white bg-gray-800"
                           : "text-gray-500 bg-white"
-                      } text-3xl font-bold p-4 w-full rounded-lg flex justify-center`}
+                      } text-3xl font-bold p-4 w-full rounded-lg flex justify-center transition duration-500`}
                     >
                       No Comments Found
                     </div>
