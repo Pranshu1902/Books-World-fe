@@ -13,6 +13,7 @@ import moment from "moment";
 import { getBooks, getComments } from "../api/ApiUtils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { TailSpin } from "react-loader-spinner";
+import EditComment from "../Modals/EditComment";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
@@ -23,6 +24,17 @@ export default function Book(props: { id: number }) {
 
   const sampleComment: commentType[] = [];
   const [comments, setComments] = useState(sampleComment);
+
+  const sampleSingleComment: commentType = {
+    text: "",
+    created_at: new Date(),
+    book: 0,
+  };
+  const [editComment, setEditComment] = useState({
+    id: 0,
+    edit: false,
+    comment: sampleSingleComment,
+  });
 
   const sampleBook: bookType = {
     id: 1,
@@ -161,14 +173,14 @@ export default function Book(props: { id: number }) {
                     style={{ backgroundColor: "#13ae4b", color: "white" }}
                     onClick={() => setUpdateBook(true)}
                   >
-                    <i className="fa fa-edit"></i>&nbsp;Update Details
+                    <i className="fas fa-pen"></i>&nbsp;Update Details
                   </Button>
                   <Button
                     variant="contained"
                     style={{ backgroundColor: "#13ae4b", color: "white" }}
                     onClick={() => setUpdateStatus(true)}
                   >
-                    <i className="fa fa-edit"></i>&nbsp;Update Status
+                    <i className="fas fa-pencil-alt"></i>&nbsp;Update Status
                   </Button>
                   <Button
                     variant="contained"
@@ -245,11 +257,23 @@ export default function Book(props: { id: number }) {
                         } text-2xl mt-4 font-medium p-4 rounded-lg w-full transition duration-500 flex flex-col md:flex-row justify-between`}
                       >
                         <p>{comment.text}</p>
-                        <p className="text-sm text-gray-500 flex items-end">
-                          {moment(comment.created_at).format(
-                            "hh:mm DD-MM-YYYY"
-                          )}
-                        </p>
+                        <div className="flex flex-col gap-1 items-end">
+                          <i
+                            className="fas fa-edit text-md cursor-pointer"
+                            onClick={() =>
+                              setEditComment({
+                                id: Number(comment.id),
+                                edit: true,
+                                comment: comment,
+                              })
+                            }
+                          ></i>
+                          <p className="text-sm text-gray-500">
+                            {moment(comment.created_at).format(
+                              "hh:mm DD-MM-YYYY"
+                            )}
+                          </p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -294,6 +318,17 @@ export default function Book(props: { id: number }) {
             closeCB={() => setAddComment(false)}
             darkMode={darkMode}
             book={book}
+          />
+        </Popup>
+        <Popup
+          open={editComment.edit}
+          onClose={() => setEditComment({ ...editComment, edit: false })}
+        >
+          <EditComment
+            closeCB={() => setEditComment({ ...editComment, edit: false })}
+            darkMode={darkMode}
+            commentId={editComment.id}
+            comment={editComment.comment}
           />
         </Popup>
       </div>

@@ -23,9 +23,10 @@ export type bookType = {
 };
 
 export type commentType = {
+  id?: number;
   text: string;
   created_at: Date;
-  book: bookType;
+  book: number;
 };
 
 export const tabs: linkType[] = [

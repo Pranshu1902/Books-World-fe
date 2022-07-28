@@ -124,7 +124,7 @@ export default function Home() {
                 href={`/book/${book.id}`}
                 className={`${
                   darkMode ? "bg-gray-800" : "bg-white"
-                } flex gap-2 rounded-lg shadow p-2 transition duration-500`}
+                } flex gap-2 rounded-lg shadow p-2 transition duration-500 hover:scale-105`}
               >
                 <img
                   src={book.image}

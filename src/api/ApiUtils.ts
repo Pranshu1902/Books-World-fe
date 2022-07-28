@@ -77,6 +77,15 @@ export const addComment = async (comment: string, book: any) => {
   return request("POST", data, "comment/");
 };
 
+export const updateComment = async (
+  newComment: string,
+  bookId: number,
+  id: number
+) => {
+  const data = { text: newComment, book: bookId };
+  return request("PUT", data, `comment/${id}/`);
+};
+
 export const updateBook = async (
   name: string,
   author: string,
