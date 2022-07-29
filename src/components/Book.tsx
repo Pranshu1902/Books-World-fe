@@ -13,6 +13,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { TailSpin } from "react-loader-spinner";
 import EditComment from "../Modals/EditComment";
 import { navigate } from "raviger";
+import UpdateBookImage from "../Modals/UpdateBookImage";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
@@ -20,6 +21,7 @@ export default function Book(props: { id: number }) {
   const [deleteBook, setDeleteBook] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [addComment, setAddComment] = useState(false);
+  const [updateImage, setUpdateImage] = useState(false);
 
   const sampleComment: commentType[] = [];
   const [comments, setComments] = useState(sampleComment);
@@ -61,7 +63,6 @@ export default function Book(props: { id: number }) {
 
     setCommentLoading(true);
     getComments().then((data) => {
-      console.log(data);
       // filtering the comments for this book
       const thisComments: commentType[] = data.filter(
         (comment: commentType) => Number(comment.book) === Number(props.id)
@@ -149,14 +150,14 @@ export default function Book(props: { id: number }) {
                       ) : book.status === "Completed" ? (
                         <div className="flex gap-2">
                           <p>Status:</p>
-                          <p className="bg-green-500 text-white px-6 rounded-full font-medium">
+                          <p className="bg-purple-500 text-white px-6 rounded-full font-medium">
                             Completed
                           </p>
                         </div>
                       ) : (
                         <div className="flex gap-2">
                           <p>Status:</p>
-                          <p className="bg-yellow-400 text-white px-6 rounded-full font-medium">
+                          <p className="bg-green-500 text-white px-6 rounded-full font-medium">
                             Reading
                           </p>
                         </div>
@@ -187,7 +188,14 @@ export default function Book(props: { id: number }) {
                     style={{ backgroundColor: "#13ae4b", color: "white" }}
                     onClick={() => setUpdateStatus(true)}
                   >
-                    <i className="fas fa-pencil-alt"></i>&nbsp;Update Status
+                    <i className="fa fa-check-circle"></i>&nbsp;Update Status
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{ backgroundColor: "#13ae4b", color: "white" }}
+                    onClick={() => setUpdateImage(true)}
+                  >
+                    <i className="fa fa-image"></i>&nbsp;Update Image
                   </Button>
                   <Button
                     variant="contained"
@@ -220,7 +228,7 @@ export default function Book(props: { id: number }) {
                   {book.status === "Completed" ? (
                     <div className="flex items-center gap-2">
                       <p className="text-gray-400">Time taken:</p>
-                      <p className="text-2xl font-medium bg-green-500 rounded-full px-6 text-white">
+                      <p className="text-2xl font-medium bg-purple-500 rounded-full px-6 text-white">
                         {book.timeTaken} days
                       </p>
                     </div>
@@ -234,7 +242,7 @@ export default function Book(props: { id: number }) {
                   ) : (
                     <div className="flex items-center gap-2">
                       <p className="text-gray-400">Time taken:</p>
-                      <p className="text-2xl font-medium bg-yellow-400 rounded-full px-6 text-white">
+                      <p className="text-2xl font-medium bg-green-500 rounded-full px-6 text-white">
                         {book.timeTaken} days
                       </p>
                     </div>
@@ -313,6 +321,16 @@ export default function Book(props: { id: number }) {
           <UpdateBookStatus
             closeCB={() => {
               setUpdateStatus(false);
+              fetchData();
+            }}
+            book={book}
+            darkMode={darkMode}
+          />
+        </Popup>
+        <Popup open={updateImage} onClose={() => setUpdateImage(false)}>
+          <UpdateBookImage
+            closeCB={() => {
+              setUpdateImage(false);
               fetchData();
             }}
             book={book}

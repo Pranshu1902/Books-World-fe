@@ -116,6 +116,17 @@ export const updateBookStatus = async (status: string, book: any) => {
   return request("PUT", data, "books/" + book.id.toString() + "/");
 };
 
+export const updateBookImage = async (image: string, book: any) => {
+  const data = {
+    id: book.id,
+    name: book.name,
+    author: book.author,
+    imageLink: image,
+  };
+  console.log(data);
+  return request("PUT", data, "books/" + book.id.toString() + "/");
+};
+
 export const deleteBook = async (bookId: number) => {
   return request("DELETE", {}, "books/" + bookId.toString() + "/");
 };
