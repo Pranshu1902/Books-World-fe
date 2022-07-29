@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
-import { updateBookImage, updateBookStatus } from "../api/ApiUtils";
+import { updateBookImage } from "../api/ApiUtils";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

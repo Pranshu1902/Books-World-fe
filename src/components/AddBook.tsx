@@ -6,8 +6,17 @@ import Header from "../Common/Header";
 import { tabs } from "../type/DataTypes";
 import { addBook } from "../api/ApiUtils";
 import { TailSpin } from "react-loader-spinner";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function AddBook() {
+  const classes = useStyles();
+
   const [darkMode, setDarkMode] = useState(mode);
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -89,7 +98,7 @@ export default function AddBook() {
               <div className="w-full">
                 <p
                   className={`${
-                    darkMode ? "text-white" : "text-gray-500"
+                    darkMode ? "text-gray-400" : "text-gray-500"
                   } text-xl font-bold`}
                 >
                   Name:
@@ -98,13 +107,14 @@ export default function AddBook() {
                   variant="outlined"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  inputProps={{ className: classes.input }}
                   fullWidth
                 />
               </div>
               <div className="w-full">
                 <p
                   className={`${
-                    darkMode ? "text-white" : "text-gray-500"
+                    darkMode ? "text-gray-400" : "text-gray-500"
                   } text-xl font-bold`}
                 >
                   Author:
@@ -113,6 +123,7 @@ export default function AddBook() {
                   variant="outlined"
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
+                  inputProps={{ className: classes.input }}
                   fullWidth
                 />
               </div>
@@ -121,7 +132,7 @@ export default function AddBook() {
               <div className="w-full">
                 <p
                   className={`${
-                    darkMode ? "text-white" : "text-gray-500"
+                    darkMode ? "text-gray-400" : "text-gray-500"
                   } text-xl font-bold`}
                 >
                   Total Pages:
@@ -130,6 +141,7 @@ export default function AddBook() {
                   type="number"
                   value={pages}
                   onChange={(e) => setPages(Number(e.target.value))}
+                  inputProps={{ className: classes.input }}
                   variant="outlined"
                   fullWidth
                 />
@@ -137,7 +149,7 @@ export default function AddBook() {
               <div className="w-full flex flex-col justify-center">
                 <p
                   className={`${
-                    darkMode ? "text-white" : "text-gray-500"
+                    darkMode ? "text-gray-400" : "text-gray-500"
                   } text-xl font-bold`}
                 >
                   Status:
@@ -145,6 +157,7 @@ export default function AddBook() {
                 <NativeSelect
                   variant="outlined"
                   onChange={(e) => setStatus(e.target.value)}
+                  inputProps={{ className: classes.input }}
                   defaultValue={status}
                   fullWidth
                 >
@@ -157,7 +170,7 @@ export default function AddBook() {
             <div className="flex flex-col gap-2">
               <p
                 className={`${
-                  darkMode ? "text-white" : "text-gray-500"
+                  darkMode ? "text-gray-400" : "text-gray-500"
                 } text-xl font-bold`}
               >
                 Image Link:
@@ -171,6 +184,7 @@ export default function AddBook() {
                 type="text"
                 value={imageLink}
                 onChange={(e) => setImageLink(e.target.value)}
+                inputProps={{ className: classes.input }}
                 variant="outlined"
                 placeholder="Leave Blank for default image"
                 fullWidth
