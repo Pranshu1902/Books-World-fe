@@ -48,7 +48,7 @@ export default function Home() {
           darkMode ? "bg-gray-900" : "bg-gray-100"
         } p-4 min-h-screen gap-4 transition duration-500`}
       >
-        <div className="flex flex-col md:flex-row justify-between gap-4">
+        <div>
           <p
             className={`${
               darkMode ? "text-white" : "text-gray-600"
@@ -56,17 +56,6 @@ export default function Home() {
           >
             Home
           </p>
-          <div>
-            <Button
-              variant="contained"
-              fullWidth
-              style={{ backgroundColor: "#13ae4b", color: "white" }}
-              className="cursor-pointer"
-              href="/add"
-            >
-              <i className="fa fa-plus"></i>&nbsp;Add New Book
-            </Button>
-          </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 pt-4 justify-between">
           <div
@@ -79,17 +68,30 @@ export default function Home() {
               {books.length ? books.length : 0}
             </p>
           </div>
-          <div>
-            <TextField
-              label="Search 🔎"
-              variant="outlined"
-              className={`${
-                darkMode ? "text-white" : ""
-              } w-full md:w-auto transition duration-500`}
-              value={search}
-              color={darkMode ? "secondary" : "primary"}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+          <div className="flex flex-col md:flex-row gap-4">
+            <div>
+              <TextField
+                label="Search 🔎"
+                variant="outlined"
+                className={`${
+                  darkMode ? "text-white" : ""
+                } w-full md:w-auto transition duration-500`}
+                value={search}
+                color={darkMode ? "secondary" : "primary"}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                fullWidth
+                style={{ backgroundColor: "#13ae4b", color: "white" }}
+                className="cursor-pointer"
+                href="/add"
+              >
+                <i className="fa fa-plus"></i>&nbsp;Add New Book
+              </Button>
+            </div>
           </div>
         </div>
         <div
@@ -117,7 +119,11 @@ export default function Home() {
                 } flex gap-2 rounded-lg shadow p-2 transition duration-500 hover:scale-105`}
               >
                 <img
-                  src={book.imageLink}
+                  src={
+                    book.imageLink === ""
+                      ? "http://books-world-pranshu1902.herokuapp.com/static/default.png"
+                      : book.imageLink
+                  }
                   alt={book.name + " logo"}
                   className="w-1/3"
                 />
