@@ -46,7 +46,7 @@ export const tabs: linkType[] = [
   {
     title: "Profile",
     link: "/profile",
-    icon: "fas fa-user-alt",
+    icon: "fa fa-user-circle-o",
     active: false,
   },
 ];

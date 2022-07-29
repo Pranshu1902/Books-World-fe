@@ -182,7 +182,7 @@ export default function Book(props: { id: number }) {
                     style={{ backgroundColor: "#13ae4b", color: "white" }}
                     onClick={() => setUpdateBook(true)}
                   >
-                    <i className="fas fa-pen"></i>&nbsp;Update Details
+                    <i className="fa fa-edit"></i>&nbsp;Update Details
                   </Button>
                   <Button
                     variant="contained"
@@ -275,7 +275,7 @@ export default function Book(props: { id: number }) {
                         <p>{comment.text}</p>
                         <div className="flex flex-col gap-1 items-end">
                           <i
-                            className="fas fa-edit text-md cursor-pointer"
+                            className="fa fa-edit text-md cursor-pointer"
                             onClick={() =>
                               setEditComment({
                                 id: Number(comment.id),
