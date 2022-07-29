@@ -86,7 +86,7 @@ export default function Home() {
                   darkMode ? "text-white" : ""
                 } w-full md:w-auto transition duration-500`}
                 value={search}
-                color={darkMode ? "secondary" : "primary"}
+                color="primary"
                 inputProps={{ className: classes.input }}
                 onChange={(e) => setSearch(e.target.value)}
               />
