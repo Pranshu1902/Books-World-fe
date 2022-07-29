@@ -8,8 +8,17 @@ import { getBooks } from "../api/ApiUtils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { TailSpin } from "react-loader-spinner";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function Home() {
+  const classes = useStyles();
+
   const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(mode);
   const [loading, setLoading] = useState(true);
@@ -78,6 +87,7 @@ export default function Home() {
                 } w-full md:w-auto transition duration-500`}
                 value={search}
                 color={darkMode ? "secondary" : "primary"}
+                inputProps={{ className: classes.input }}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>

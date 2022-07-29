@@ -2,12 +2,21 @@ import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateBook } from "../api/ApiUtils";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function UpdateBook(props: {
   closeCB: () => void;
   book: any;
   darkMode: boolean;
 }) {
+  const classes = useStyles();
+
   const [name, setName] = useState(props.book.name);
   const [author, setAuthor] = useState(props.book.author);
   const [pagesRead, setPagesRead] = useState(props.book.pagesRead);
@@ -51,6 +60,7 @@ export default function UpdateBook(props: {
               variant="outlined"
               type="text"
               onChange={(e) => setName(e.target.value)}
+              inputProps={{ className: classes.input }}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
           </div>
@@ -61,6 +71,7 @@ export default function UpdateBook(props: {
               variant="outlined"
               type="text"
               onChange={(e) => setAuthor(e.target.value)}
+              inputProps={{ className: classes.input }}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
           </div>
@@ -73,6 +84,7 @@ export default function UpdateBook(props: {
               title="Pages Read"
               type="number"
               onChange={(e) => setPagesRead(e.target.value)}
+              inputProps={{ className: classes.input }}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
             /
@@ -82,6 +94,7 @@ export default function UpdateBook(props: {
               title="Total Pages"
               name="Total Pages"
               onChange={(e) => setPagesTotal(e.target.value)}
+              inputProps={{ className: classes.input }}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
           </div>
@@ -94,6 +107,7 @@ export default function UpdateBook(props: {
               variant="outlined"
               type="number"
               onChange={(e) => setTime(Number(e.target.value))}
+              inputProps={{ className: classes.input }}
               className="py-2 p-2 border-2 border-green-300 rounded-lg"
             />
           </div>

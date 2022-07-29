@@ -3,6 +3,13 @@ import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateComment } from "../api/ApiUtils";
 import { commentType } from "../type/DataTypes";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function EditComment(props: {
   closeCB: () => void;
@@ -10,6 +17,8 @@ export default function EditComment(props: {
   commentId: number;
   comment: commentType;
 }) {
+  const classes = useStyles();
+
   const [loading, setLoading] = useState(false);
   const [newComment, setNewComment] = useState(props.comment.text);
 
@@ -41,6 +50,7 @@ export default function EditComment(props: {
             type="text"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
+            inputProps={{ className: classes.input }}
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>

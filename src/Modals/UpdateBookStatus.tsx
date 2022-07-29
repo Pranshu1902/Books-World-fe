@@ -2,12 +2,21 @@ import { Button, NativeSelect } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateBookStatus } from "../api/ApiUtils";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function UpdateBookStatus(props: {
   closeCB: () => void;
   book: any;
   darkMode: boolean;
 }) {
+  const classes = useStyles();
+
   const [status, setStatus] = useState(props.book.status);
 
   const [loading, setLoading] = useState(false);
@@ -33,6 +42,7 @@ export default function UpdateBookStatus(props: {
             <NativeSelect
               variant="outlined"
               onChange={(e) => setStatus(e.target.value)}
+              inputProps={{ className: classes.input }}
               defaultValue={status}
             >
               <option value="Completed">Completed</option>

@@ -2,12 +2,21 @@ import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { updateBookImage, updateBookStatus } from "../api/ApiUtils";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function UpdateBookImage(props: {
   closeCB: () => void;
   book: any;
   darkMode: boolean;
 }) {
+  const classes = useStyles();
+
   const [image, setImage] = useState(props.book.imageLink);
 
   const [loading, setLoading] = useState(false);
@@ -33,6 +42,7 @@ export default function UpdateBookImage(props: {
             variant="outlined"
             onChange={(e) => setImage(e.target.value)}
             placeholder="Leave Blank for default image"
+            inputProps={{ className: classes.input }}
             defaultValue={image}
           />
         </div>

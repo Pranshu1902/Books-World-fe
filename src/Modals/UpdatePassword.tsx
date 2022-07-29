@@ -2,6 +2,13 @@ import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 // import { updatePassword } from "../api/ApiUtils";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function UpdatePassword(props: {
   closeCB: () => void;
@@ -9,6 +16,8 @@ export default function UpdatePassword(props: {
   userId: number;
   user: any;
 }) {
+  const classes = useStyles();
+
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,6 +50,7 @@ export default function UpdatePassword(props: {
             label="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            inputProps={{ className: classes.input }}
             type="password"
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
@@ -49,6 +59,7 @@ export default function UpdatePassword(props: {
             label="Confirm New Password"
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
+            inputProps={{ className: classes.input }}
             type="password"
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />

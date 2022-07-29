@@ -2,12 +2,21 @@ import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { addComment } from "../api/ApiUtils";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  input: {
+    color: localStorage.getItem("mode") === "dark" ? "white" : "black",
+  },
+});
 
 export default function AddComment(props: {
   closeCB: () => void;
   darkMode: boolean;
   book: any;
 }) {
+  const classes = useStyles();
+
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
 
@@ -40,6 +49,7 @@ export default function AddComment(props: {
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            inputProps={{ className: classes.input }}
             color={`${props.darkMode ? "secondary" : "primary"}`}
           />
         </div>

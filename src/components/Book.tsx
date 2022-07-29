@@ -14,12 +14,13 @@ import { TailSpin } from "react-loader-spinner";
 import EditComment from "../Modals/EditComment";
 import { navigate } from "raviger";
 import UpdateBookImage from "../Modals/UpdateBookImage";
+import { mode } from "../Common/Data";
 
 export default function Book(props: { id: number }) {
   const [updateBook, setUpdateBook] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
   const [deleteBook, setDeleteBook] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(mode);
   const [addComment, setAddComment] = useState(false);
   const [updateImage, setUpdateImage] = useState(false);
 
