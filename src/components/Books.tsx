@@ -116,7 +116,7 @@ export default function Books() {
                   href={`/book/${book.id}`}
                   className={`${
                     darkMode ? "bg-gray-800" : "bg-white"
-                  } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500`}
+                  } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500 hover:scale-105`}
                 >
                   <div className="w-1/6 hidden md:block">
                     <img
@@ -136,18 +136,21 @@ export default function Books() {
                     <p
                       className={`${
                         darkMode ? "bg-gray-700" : "bg-gray-100"
-                      } rounded-full p-3 transition duration-500`}
+                      } rounded-full p-2 flex gap-2 transition duration-500`}
                     >
                       Comments:{" "}
-                      {
-                        comments.filter(
-                          (comment) => Number(comment.book) === Number(book.id)
-                        ).length
-                      }
+                      <p>
+                        {
+                          comments.filter(
+                            (comment) =>
+                              Number(comment.book) === Number(book.id)
+                          ).length
+                        }
+                      </p>
                     </p>
                   </div>
                   <div className="w-1/4 flex justify-center items-center">
-                    <div className="text-3xl w-1/3">
+                    <div className="text-3xl md:w-1/3">
                       <CircularProgressbar
                         value={(book.pagesRead / book.totalPages) * 100}
                         text={`${(book.pagesRead / book.totalPages) * 100}%`}

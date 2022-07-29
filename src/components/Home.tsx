@@ -128,9 +128,11 @@ export default function Home() {
                   className="w-1/3"
                 />
                 <div className="pl-4 w-2/3">
-                  <p className="text-3xl font-bold">{book.name}</p>
-                  <div className="gap-4">
-                    <p className="pt-6">{book.author}</p>
+                  <div className="flex flex-row md:flex-col gap-4">
+                    <div>
+                      <p className="text-3xl font-bold">{book.name}</p>
+                      <p className="pt-4">{book.author}</p>
+                    </div>
                     <div className="text-3xl w-1/3">
                       <CircularProgressbar
                         value={(book.pagesRead / book.totalPages) * 100}

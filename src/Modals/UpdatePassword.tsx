@@ -29,7 +29,7 @@ export default function UpdatePassword(props: {
     <div className={`${props.darkMode ? "bg-gray-700" : ""} p-6`}>
       <h1
         className={`${
-          props.darkMode ? "text-white" : "text-blue-500"
+          props.darkMode ? "text-white" : "text-black"
         } text-4xl font-semibold flex items-center justify-center`}
       >
         Update Password

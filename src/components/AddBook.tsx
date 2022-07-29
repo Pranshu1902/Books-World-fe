@@ -172,6 +172,7 @@ export default function AddBook() {
                 value={imageLink}
                 onChange={(e) => setImageLink(e.target.value)}
                 variant="outlined"
+                placeholder="Leave Blank for default image"
                 fullWidth
               />
             </div>

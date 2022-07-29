@@ -1,5 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import { me, updateUser } from "../api/ApiUtils";
 import { mode } from "../Common/Data";
 import Header from "../Common/Header";
@@ -16,6 +17,7 @@ export default function Profile() {
   const [password, setPassword] = useState("");
   const [updatePass, setUpdatePass] = useState(false);
   const [darkMode, setDarkMode] = useState(mode);
+  const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useState(null);
 
@@ -28,6 +30,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    setLoading(true);
     me().then((data) => {
       console.log(data);
 
@@ -39,6 +42,7 @@ export default function Profile() {
       setPassword(data.password);
 
       setUser(data);
+      setLoading(false);
     });
 
     document.title = "Profile | Book's World";
@@ -62,77 +66,88 @@ export default function Profile() {
           Profile
         </p>
 
-        <div className="p-4">
-          <div className="flex justify-center">
-            <div
-              className={`${
-                darkMode ? "text-white" : ""
-              } grid grid-cols-1 md:grid-cols-2 pt-6 gap-12 transition duration-500`}
-            >
-              <div>
-                <p className="text-xl font-bold">First Name:</p>
-                <TextField
-                  variant="outlined"
-                  className={`${
-                    darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg transition duration-500`}
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </div>
-              <div>
-                <p className="text-xl font-bold">Last Name:</p>
-                <TextField
-                  variant="outlined"
-                  className={`${
-                    darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg transition duration-500`}
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
-              <div>
-                <p className="text-xl font-bold">Username:</p>
-                <TextField
-                  variant="outlined"
-                  className={`${
-                    darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg transition duration-500`}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div>
-                <p className="text-xl font-bold">Email:</p>
-                <TextField
-                  variant="outlined"
-                  className={`${
-                    darkMode ? "bg-gray-400" : "bg-white"
-                  } shadow-lg transition duration-500`}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+        {loading ? (
+          <div className="flex justify-center items-center pt-16">
+            <TailSpin
+              color="#13ae4b"
+              height={40}
+              width={40}
+              ariaLabel="loading-indicator"
+            />
+          </div>
+        ) : (
+          <div className="p-4">
+            <div className="flex justify-center">
+              <div
+                className={`${
+                  darkMode ? "text-white" : ""
+                } grid grid-cols-1 md:grid-cols-2 pt-6 gap-12 transition duration-500`}
+              >
+                <div>
+                  <p className="text-xl font-bold">First Name:</p>
+                  <TextField
+                    variant="outlined"
+                    className={`${
+                      darkMode ? "bg-gray-400" : "bg-white"
+                    } shadow-lg transition duration-500`}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <p className="text-xl font-bold">Last Name:</p>
+                  <TextField
+                    variant="outlined"
+                    className={`${
+                      darkMode ? "bg-gray-400" : "bg-white"
+                    } shadow-lg transition duration-500`}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <p className="text-xl font-bold">Username:</p>
+                  <TextField
+                    variant="outlined"
+                    className={`${
+                      darkMode ? "bg-gray-400" : "bg-white"
+                    } shadow-lg transition duration-500`}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <p className="text-xl font-bold">Email:</p>
+                  <TextField
+                    variant="outlined"
+                    className={`${
+                      darkMode ? "bg-gray-400" : "bg-white"
+                    } shadow-lg transition duration-500`}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
+            <div className="flex flex-col md:flex-row gap-4 justify-center p-6 pt-12">
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={updateUserInfo}
+                onSubmit={updateUserInfo}
+              >
+                Update Info
+              </Button>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#13ae4b", color: "white" }}
+                onClick={() => setUpdatePass(true)}
+              >
+                Change Password
+              </Button>
+            </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-4 justify-center p-6 pt-12">
-            <Button
-              variant="contained"
-              type="submit"
-              onClick={updateUserInfo}
-              onSubmit={updateUserInfo}
-            >
-              Update Info
-            </Button>
-            <Button
-              variant="contained"
-              style={{ backgroundColor: "#13ae4b", color: "white" }}
-              onClick={() => setUpdatePass(true)}
-            >
-              Change Password
-            </Button>
-          </div>
-        </div>
+        )}
         <Popup open={updatePass} onClose={() => setUpdatePass(false)}>
           <UpdatePassword
             closeCB={() => setUpdatePass(false)}
