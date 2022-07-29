@@ -9,7 +9,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(user);
   useEffect(() => {
     if (!currentUser && !localStorage.getItem("token")) {
-      navigate("/login");
+      navigate("/");
     }
 
     me().then((currentUsers) => {
