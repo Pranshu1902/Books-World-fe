@@ -7,6 +7,7 @@ import Signup from "../components/User/Signup";
 import Profile from "../components/Profile";
 import Book from "../components/Book";
 import AddBook from "../components/AddBook";
+import UsersCount from "../components/UsersCount";
 
 const routes = {
   "/": () => <LandingPage />,
@@ -17,6 +18,7 @@ const routes = {
   "/add": () => <AddBook />,
   "/profile": () => <Profile />,
   "/book/:id": ({ id }: { id: string }) => <Book id={Number(id)} />,
+  "/count": () => <UsersCount />,
 };
 
 export default function AppRouter(props: { user: any }) {

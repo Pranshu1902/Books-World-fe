@@ -47,6 +47,10 @@ const request: any = async (
   }
 };
 
+export const getUsersCount = async () => {
+  return request("GET", {}, "user/");
+};
+
 export const login = async (username: string, password: string) => {
   const data = { username: username, password: password };
   return request("POST", data, "api-token-auth/");
