@@ -119,7 +119,14 @@ export default function Books() {
                   } flex flex-row gap-6 rounded-lg shadow p-2 transition duration-500`}
                 >
                   <div className="w-1/6 hidden md:block">
-                    <img src={book.imageLink} alt={`${book.name} logo`} />
+                    <img
+                      src={
+                        book.imageLink === ""
+                          ? "http://books-world-pranshu1902.herokuapp.com/static/default.png"
+                          : book.imageLink
+                      }
+                      alt={`${book.name} logo`}
+                    />
                   </div>
                   <div className="w-1/2 pl-2">
                     <p className="text-3xl font-bold">{book.name}</p>
