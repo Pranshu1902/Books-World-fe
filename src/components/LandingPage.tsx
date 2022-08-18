@@ -67,6 +67,18 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+      <div className="flex justify-center items-center p-2">
+        Made with &nbsp;<i className="fa fa-heart text-red-500"></i>&nbsp;
+        by&nbsp;
+        <a
+          href="https://pranshu1902.netlify.app"
+          target={"_blank"}
+          rel={"noreferrer"}
+          className="transition duration-300 underline hover:font-bold hover:text-green-600"
+        >
+          Pranshu
+        </a>
+      </div>
     </div>
   );
 }
