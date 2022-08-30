@@ -23,7 +23,7 @@ export default function Books() {
   const fetchData = () => {
     setLoading(true);
     getBooks().then((data) => {
-      setBooks(data);
+      setBooks(data.reverse());
     });
 
     getComments().then((data) => {

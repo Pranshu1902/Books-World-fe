@@ -35,9 +35,11 @@ export default function Home() {
     getBooks().then((data) => {
       console.log(data);
       setBooks(
-        data.filter((book: bookType) =>
-          book.name.toLowerCase().includes(search.toLowerCase())
-        )
+        data
+          .filter((book: bookType) =>
+            book.name.toLowerCase().includes(search.toLowerCase())
+          )
+          .reverse()
       );
       setLoading(false);
     });
