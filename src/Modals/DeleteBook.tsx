@@ -38,17 +38,28 @@ export default function DeleteBook(props: {
             />
           </div>
         ) : (
-          <div className="flex justify-between">
-            <Button variant="contained" onClick={() => props.closeCB()}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              style={{ backgroundColor: "red", color: "white" }}
-            >
-              Delete
-            </Button>
+          <div className="flex flex-col md:flex-row gap-2 justify-between">
+            <div>
+              <Button
+                fullWidth
+                className="w-full md:w-auto"
+                variant="contained"
+                onClick={() => props.closeCB()}
+              >
+                Cancel
+              </Button>
+            </div>
+            <div>
+              <Button
+                fullWidth
+                className="w-full md:w-auto"
+                variant="contained"
+                type="submit"
+                style={{ backgroundColor: "red", color: "white" }}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
         )}
       </form>
