@@ -1,3 +1,5 @@
+<img width="80px" src="https://user-images.githubusercontent.com/70687348/198128622-26955bbf-50f1-4d75-a90f-b94e003690fe.png" />
+
 # Books-World-fe
 
 Deployed at: https://books-world-pranshu1902.netlify.app
