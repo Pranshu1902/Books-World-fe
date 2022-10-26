@@ -22,3 +22,18 @@ API built using Django-Rest-Framework and deployed on Heroku
 
 API Swagger: https://books-world-pranshu1902.herokuapp.com/api/swagger/
 ![image](https://user-images.githubusercontent.com/70687348/198127411-9e7c755a-3b1d-4c48-a0c7-31cbe29e47a4.png)
+
+# Installation
+## Front-end
+```
+npm install
+npm start
+```
+Localhost server: 3000
+
+## Back-end
+```
+pip3 install -r requirements.txt
+python3 manage.py runserver
+```
+Localhost server: 8000
