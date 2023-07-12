@@ -53,9 +53,7 @@ export const getUsersCount = async () => {
 
 export const login = async (username: string, password: string) => {
   const data = { username: username, password: password };
-  const res = await request("POST", data, "api-token-auth/");
-  console.log(res);
-  return res;
+  return request("POST", data, "api-token-auth/");
 };
 
 export const signup = async (username: string, password: string) => {
