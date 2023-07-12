@@ -15,7 +15,7 @@ function App() {
     me().then((currentUsers) => {
       setCurrentUser(currentUsers);
     });
-  }, [currentUser]);
+  }, []);
 
   return <AppRouter user={currentUser} />;
 }

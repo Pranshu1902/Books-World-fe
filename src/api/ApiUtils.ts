@@ -1,5 +1,5 @@
-const baseURL = "https://books-world-pranshu1902.herokuapp.com/";
-// const baseURL = "http://127.0.0.1:8000/";
+// const baseURL = "https://books-world-pranshu1902.herokuapp.com/";
+const baseURL = "http://127.0.0.1:8000/";
 
 type methods = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -53,7 +53,9 @@ export const getUsersCount = async () => {
 
 export const login = async (username: string, password: string) => {
   const data = { username: username, password: password };
-  return request("POST", data, "api-token-auth/");
+  const res = await request("POST", data, "api-token-auth/");
+  console.log(res);
+  return res;
 };
 
 export const signup = async (username: string, password: string) => {

@@ -112,7 +112,7 @@ export default function Book(props: { id: number }) {
                   <img
                     src={
                       book.imageLink === ""
-                        ? "http://books-world-pranshu1902.herokuapp.com/static/default.png"
+                        ? "http://localhost:8000/static/default.png"
                         : book.imageLink
                     }
                     className="md:w-1/2"
@@ -132,7 +132,7 @@ export default function Book(props: { id: number }) {
                           <CircularProgressbar
                             value={(book.pagesRead / book.totalPages) * 100}
                             text={`${
-                              (book.pagesRead / book.totalPages) * 100
+                              Math.round((book.pagesRead / book.totalPages) * 100)
                             }%`}
                             styles={buildStyles({
                               textColor: darkMode ? "white" : "#13ae4b",
