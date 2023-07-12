@@ -115,7 +115,7 @@ export default function Book(props: { id: number }) {
                         ? "http://localhost:8000/static/default.png"
                         : book.imageLink
                     }
-                    className="md:w-1/2"
+                    className="md:max-w-1/2"
                     alt=""
                   />
                   <div>
