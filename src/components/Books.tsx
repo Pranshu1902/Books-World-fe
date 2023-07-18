@@ -153,7 +153,9 @@ export default function Books() {
                     <div className="text-3xl md:w-1/3">
                       <CircularProgressbar
                         value={(book.pagesRead / book.totalPages) * 100}
-                        text={`${Math.round((book.pagesRead / book.totalPages) * 100)}%`}
+                        text={`${Math.round(
+                          (book.pagesRead / book.totalPages) * 100
+                        )}%`}
                         styles={buildStyles({
                           textColor: darkMode ? "white" : "#13ae4b",
                           pathColor: "#13ae4b",
